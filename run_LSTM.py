@@ -95,9 +95,10 @@ column = args.target
 
 df = pd.read_csv(path)
 timeseries = df[[column]].values.astype('float32')
-train_size = int(len(timeseries) * 0.70)
-test_size = len(timeseries) - train_size
-train, test = timeseries[:train_size], timeseries[train_size:]
+total_len = int(len(timeseries)*0.1)  # 10 % of datas for test
+train_size = int(len(timeseries[:total_len]) * 0.70)
+test_size = len(timeseries[:total_len]) - train_size
+train, test = timeseries[:train_size], timeseries[train_size:total_len]
 
 
 def create_dataset(dataset, lookback, lookforward):
