@@ -175,18 +175,19 @@ class Shallow_LSTM(nn.Module):
         return x
 
 
-model = Shallow_LSTM.to(args.gpu)
+model = Shallow_LSTM()
+model.to(args.gpu)
 optimizer = optim.Adam(model.parameters(), lr=float(args.learning_rate))
 loss_fn = nn.MSELoss()
 loss_fn2 = nn.L1Loss()
-loader = data.DataLoader(data.TensorDataset(
-    X_train, y_train), shuffle=True, batch_size=int(args.batch_size))
+# loader = data.DataLoader(data.TensorDataset(
+#     X_train, y_train), shuffle=True, batch_size=int(args.batch_size))
 
 n_epochs = int(args.num_epochs)
 model.double()
 for epoch in range(n_epochs):
     model.train()
-    for X_batch, y_batch in loader:
+    for X_batch, y_batch in train_loader:
         y_pred = model(X_batch)
         loss = loss_fn(y_pred, y_batch)
         optimizer.zero_grad()
