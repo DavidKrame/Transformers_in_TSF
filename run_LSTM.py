@@ -80,6 +80,8 @@ elif (torch.cuda.is_available()) and not (args.use_multi_gpu):
 else:
     device = "cpu"
 
+device = 'cpu'
+
 args.gpu = torch.device(device)
 
 print("WORK USING {}".format(args.gpu))
