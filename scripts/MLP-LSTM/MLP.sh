@@ -10,7 +10,7 @@ num_epochs=10
 model_name="MLP"
 seq_len=96
 num_neurons=1000
-batch_size=32
+batch_size=4
 
 for pred_len in 96 192 384 768
 do

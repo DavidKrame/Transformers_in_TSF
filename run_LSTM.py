@@ -8,7 +8,7 @@ import torch.utils.data as data
 import argparse
 import os
 import random
-
+from torch.utils.data import Dataset, DataLoader
 
 fix_seed = 2021
 random.seed(fix_seed)
@@ -48,8 +48,8 @@ parser.add_argument('--num_neurons', type=int, default=1000,
 parser.add_argument('--num_epochs', type=int, default=10,
                     help='number of epochs')
 parser.add_argument('--learning_rate', type=float,
-                    default=0.0001, help='optimizer learning rate')
-parser.add_argument('--batch_size', type=int, default=8,
+                    default=0.001, help='optimizer learning rate')
+parser.add_argument('--batch_size', type=int, default=4,
                     help='batch size of train input data')
 parser.add_argument("--num_layers", type=int, default=1,
                     help="Number of layers in LSTM")
@@ -77,12 +77,10 @@ if args.use_gpu and args.use_multi_gpu:
     args.gpu = args.device_ids[0]
 elif (torch.cuda.is_available()) and not (args.use_multi_gpu):
     device = "cuda:0"
+    args.gpu = torch.device(device)
 else:
     device = "cpu"
-
-device = 'cpu'
-
-args.gpu = torch.device(device)
+    args.gpu = torch.device(device)
 
 print("WORK USING {}".format(args.gpu))
 
@@ -90,15 +88,21 @@ print('Args :')
 print(args)
 
 
-path = os.path.join(args.root_path, args.data_path)
-column = args.target
+class MyDatas(Dataset):
+    def __init__(self, X, y):
+        # convert into PyTorch tensors and remember them
+        self.X = X
+        self.y = y
 
-df = pd.read_csv(path)
-timeseries = df[[column]].values.astype('float32')
-total_len = int(len(timeseries)*0.1)  # 10 % of datas for test
-train_size = int(len(timeseries[:total_len]) * 0.70)
-test_size = len(timeseries[:total_len]) - train_size
-train, test = timeseries[:train_size], timeseries[train_size:total_len]
+    def __len__(self):
+        # this should return the size of the dataset
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        # this should return one sample from the dataset
+        features = self.X[idx]
+        target = self.y[idx]
+        return features, target
 
 
 def create_dataset(dataset, lookback, lookforward):
@@ -125,8 +129,18 @@ def create_dataset(dataset, lookback, lookforward):
         y.append(target)
     X = np.array(X)
     y = np.array(y)
-    return torch.tensor(X, dtype=torch.float64), torch.tensor(y, dtype=torch.float64)
+    return torch.tensor(X, dtype=torch.double), torch.tensor(y, dtype=torch.double)
 
+
+path = os.path.join(args.root_path, args.data_path)
+column = args.target
+
+df = pd.read_csv(path)
+timeseries = df[[column]].values.astype('double')
+total_len = int(len(timeseries)*0.1)  # 10 % of datas for test
+train_size = int(len(timeseries[:total_len]) * 0.70)
+test_size = len(timeseries[:total_len]) - train_size
+train, test = timeseries[:train_size], timeseries[train_size:total_len]
 
 lookback = int(args.seq_len)
 lookforward = int(args.pred_len)
@@ -135,10 +149,14 @@ X_train, y_train = create_dataset(
 X_test, y_test = create_dataset(
     test, lookback=lookback, lookforward=lookforward)
 
-X_train = X_train.to(args.gpu)
-y_train = y_train.to(args.gpu)
-X_test = X_test.to(args.gpu)
-y_test = y_test.to(args.gpu)
+
+# set up DataLoader for training set
+train_dataset = MyDatas(X_train, y_train)
+test_dataset = MyDatas(X_test, y_test)
+train_loader = DataLoader(train_dataset, shuffle=True,
+                          batch_size=int(args.batch_size))
+test_loader = DataLoader(test_dataset, shuffle=True,
+                         batch_size=int(args.batch_size))
 
 num_hidden_neurons = int(args.num_neurons)
 
