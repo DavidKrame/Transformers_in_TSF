@@ -8,6 +8,7 @@ import torch.utils.data as data
 import argparse
 import os
 import random
+from torch.utils.data import Dataset, DataLoader
 
 
 fix_seed = 2021
@@ -88,15 +89,21 @@ print('Args :')
 print(args)
 
 
-path = os.path.join(args.root_path, args.data_path)
-column = args.target
+class MyDatas(Dataset):
+    def __init__(self, X, y):
+        # convert into PyTorch tensors and remember them
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y, dtype=torch.float32)
 
-df = pd.read_csv(path)
-timeseries = df[[column]].values.astype('float32')
-total_len = int(len(timeseries)*0.1)  # 10 % of datas for test
-train_size = int(len(timeseries[:total_len]) * 0.70)
-test_size = len(timeseries[:total_len]) - train_size
-train, test = timeseries[:train_size], timeseries[train_size:total_len]
+    def __len__(self):
+        # this should return the size of the dataset
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        # this should return one sample from the dataset
+        features = self.X[idx]
+        target = self.y[idx]
+        return features, target
 
 
 def create_dataset(dataset, lookback, lookforward):
@@ -126,6 +133,16 @@ def create_dataset(dataset, lookback, lookforward):
     return torch.tensor(X, dtype=torch.float64), torch.tensor(y, dtype=torch.float64)
 
 
+path = os.path.join(args.root_path, args.data_path)
+column = args.target
+
+df = pd.read_csv(path)
+timeseries = df[[column]].values.astype('float32')
+total_len = int(len(timeseries)*0.1)  # 10 % of datas for test
+train_size = int(len(timeseries[:total_len]) * 0.70)
+test_size = len(timeseries[:total_len]) - train_size
+train, test = timeseries[:train_size], timeseries[train_size:total_len]
+
 lookback = int(args.seq_len)
 lookforward = int(args.pred_len)
 X_train, y_train = create_dataset(
@@ -133,10 +150,17 @@ X_train, y_train = create_dataset(
 X_test, y_test = create_dataset(
     test, lookback=lookback, lookforward=lookforward)
 
-X_train = X_train.to(args.gpu)
-y_train = y_train.to(args.gpu)
-X_test = X_test.to(args.gpu)
-y_test = y_test.to(args.gpu)
+
+# set up DataLoader for training set
+train_dataset = MyDatas(X_train, y_train)
+test_dataset = MyDatas(X_test, y_test)
+train_loader = DataLoader(train_dataset, shuffle=True, batch_size=16)
+test_loader = DataLoader(test_dataset, shuffle=True, batch_size=16)
+
+# X_train = X_train.to(args.gpu)
+# y_train = y_train.to(args.gpu)
+# X_test = X_test.to(args.gpu)
+# y_test = y_test.to(args.gpu)
 
 num_hidden_neurons = int(args.num_neurons)
 
@@ -149,14 +173,14 @@ model = AirModel.to(args.gpu)
 optimizer = optim.Adam(model.parameters(), lr=float(args.learning_rate))
 loss_fn = nn.MSELoss()
 loss_fn2 = nn.L1Loss()
-loader = data.DataLoader(data.TensorDataset(
-    X_train, y_train), shuffle=True, batch_size=int(args.batch_size))
+# loader = data.DataLoader(data.TensorDataset(
+#     X_train, y_train), shuffle=True, batch_size=int(args.batch_size))
 
 n_epochs = int(args.num_epochs)
 model.double()
 for epoch in range(n_epochs):
     model.train()
-    for X_batch, y_batch in loader:
+    for X_batch, y_batch in train_loader:
         y_pred = model(X_batch)
         loss = loss_fn(y_pred, y_batch)
         optimizer.zero_grad()
