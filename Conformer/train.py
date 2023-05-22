@@ -12,16 +12,17 @@ random.seed(fix_seed)
 torch.manual_seed(fix_seed)
 np.random.seed(fix_seed)
 
-parser = argparse.ArgumentParser(description='Very Long Sequences Forecasting')
+parser = argparse.ArgumentParser(
+    description='Conformer for Very Long Sequences Forecasting')
 
 parser.add_argument('--model', type=str, default='Model',
                     help='model of experiment, options: [informer, informerstack, informerlight(TBD)]')
 parser.add_argument('--data', type=str, default='elec', help='data')
 parser.add_argument('--root_path', type=str,
-                    default='./data/ETTh1/', help='root path of the data file')
+                    default='./datataset', help='root path of the data file')
 parser.add_argument('--data_path', type=str,
                     default='ETTh1.csv', help='data file')  # 改文件名
-parser.add_argument('--features', type=str, default='M',
+parser.add_argument('--features', type=str, default='S',
                     help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
 parser.add_argument('--target', type=str, default='OT',
                     help='target feature in S or MS task')
@@ -34,7 +35,7 @@ parser.add_argument('--seq_len', type=int, default=96,
                     help='input sequence length of Informer encoder')
 parser.add_argument('--label_len', type=int, default=48,
                     help='start token length of Informer decoder')
-parser.add_argument('--pred_len', type=int, default=48,
+parser.add_argument('--pred_len', type=int, default=96,
                     help='prediction sequence length')
 parser.add_argument('--step_len', type=int, default=25, help='step length')
 
@@ -125,8 +126,8 @@ data_parser = {
     'ETTh2': {'data': 'ETTh2.csv', 'T': 'OT', 'M': [7, 7, 7], 'S': [1, 1, 1], 'MS': [7, 7, 1], 'freq': 'h'},
     'ETTm1': {'data': 'ETTm1.csv', 'T': 'OT', 'M': [7, 7, 7], 'S': [1, 1, 1], 'MS': [7, 7, 1], 'freq': 't'},
     'ETTm2': {'data': 'ETTm2.csv', 'T': 'OT', 'M': [7, 7, 7], 'S': [1, 1, 1], 'MS': [7, 7, 1], 'freq': 't'},
-    'WTH': {'data': 'weather.csv', 'T': 'T (degC)', 'M': [21, 21, 21], 'S': [1, 1, 1], 'MS': [21, 21, 1], 'freq': 'h'},
-    'ECL': {'data': 'electricity.csv', 'T': 'MT_321', 'M': [321, 321, 321], 'S': [1, 1, 1], 'MS': [321, 321, 1], 'freq': 't'},
+    'WTH': {'data': 'weather.csv', 'T': 'OT', 'M': [21, 21, 21], 'S': [1, 1, 1], 'MS': [21, 21, 1], 'freq': 'h'},
+    'ECL': {'data': 'electricity.csv', 'T': 'OT', 'M': [321, 321, 321], 'S': [1, 1, 1], 'MS': [321, 321, 1], 'freq': 't'},
     'TRAF': {'data': 'traffic.csv', 'T': 'tensor862', 'M': [861, 861, 861], 'S': [1, 1, 1], 'MS': [861, 861, 1], 'freq': 'h'},
     'EXCH': {'data': 'exchange_rate.csv', 'T': 'county8', 'M': [8, 8, 8], 'S': [1, 1, 1], 'MS': [8, 8, 1]},
     'elec': {'T': 'target', 'M': [7, 7, 7], 'S': [1, 1, 1], 'MS': [7, 7, 1], 'freq': 't'},

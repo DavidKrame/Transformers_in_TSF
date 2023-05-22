@@ -17,7 +17,7 @@ np.random.seed(fix_seed)
 
 
 parser = argparse.ArgumentParser(
-    description='Multi-Layer Perceptron for Time series forecasting')
+    description='LSTM for Time series forecasting')
 
 # Basics configurations
 parser.add_argument('--is_training', type=int,
@@ -51,6 +51,8 @@ parser.add_argument('--learning_rate', type=float,
                     default=0.0001, help='optimizer learning rate')
 parser.add_argument('--batch_size', type=int, default=8,
                     help='batch size of train input data')
+parser.add_argument("--num_layers", type=int, default=1,
+                    help="Number of layers in LSTM")
 parser.add_argument('--patience', type=int, default=5,
                     help='early stopping patience')
 
@@ -137,12 +139,22 @@ y_test = y_test.to(args.gpu)
 
 num_hidden_neurons = int(args.num_neurons)
 
-AirModel = nn.Sequential()
-AirModel.add_module("dense1", nn.Linear(1, num_hidden_neurons))
-AirModel.add_module("act1", nn.GELU())
-AirModel.add_module("dense2", nn.Linear(num_hidden_neurons, 1))
 
-model = AirModel.to(args.gpu)
+class Shallow_LSTM(nn.Module):
+
+    def __init__(self):
+        super().__init__()
+        self.lstm = nn.LSTM(
+            input_size=1, hidden_size=num_hidden_neurons, num_layers=args.num_layers, batch_first=True)
+        self.linear = nn.Linear(num_hidden_neurons, 1)
+
+    def forward(self, x):
+        x, _ = self.lstm(x)
+        x = self.linear(x)
+        return x
+
+
+model = Shallow_LSTM.to(args.gpu)
 optimizer = optim.Adam(model.parameters(), lr=float(args.learning_rate))
 loss_fn = nn.MSELoss()
 loss_fn2 = nn.L1Loss()
