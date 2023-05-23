@@ -241,13 +241,10 @@ class Dataset_elec(Dataset):
             border1s = [0, 12*30*24*4 - self.seq_len,
                         12*30*24*4+1*30*24*4 - self.seq_len]
             border2s = [12*30*24*4, 12*30*24*4+1*30*24*4, 12*30*24*4+2*30*24*4]
-        elif self.data_set == 'ECL':  # 7/1/1
-            # border1s = [0, 12*30*24 - self.seq_len,
-            #             12*30*24+2*30*24 - self.seq_len]
-            # border2s = [12*30*24, 12*30*24+2*30*24, 12*30*24+4*30*24]
-            border1s = [0, 12*30*24*4 - self.seq_len,
-                        12*30*24*4+2*30*24*4 - self.seq_len]
-            border2s = [12*30*24*4, 12*30*24*4+2*30*24*4, 12*30*24*4+4*30*24*4]
+        elif self.data_set == 'ECL':  # 12/2/2
+            border1s = [0, 12*30*24 - self.seq_len,
+                        12*30*24+2*30*24 - self.seq_len]
+            border2s = [12*30*24, 12*30*24+2*30*24, 12*30*24+4*30*24]
         elif self.data_set == 'WTH':  # 24/2/2
             # border1s = [0, 24*30*6*8 - self.seq_len, 24*30*6*8+6*30*24 - self.seq_len]
             # border2s = [24*30*6*8, 24*30*6*8+30*24*6, 24*30*6*8+6*30*24*2]
