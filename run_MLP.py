@@ -9,13 +9,14 @@ import argparse
 import os
 import random
 from torch.utils.data import Dataset, DataLoader
+from sklearn.preprocessing import StandardScaler
+from math import sqrt
 
 
 fix_seed = 2021
 random.seed(fix_seed)
 torch.manual_seed(fix_seed)
 np.random.seed(fix_seed)
-
 
 parser = argparse.ArgumentParser(
     description='Multi-Layer Perceptron for Time series forecasting')
@@ -136,6 +137,15 @@ column = args.target
 
 df = pd.read_csv(path)
 timeseries = df[[column]].values.astype('double')
+# prepare data for standardization
+timeseries = timeseries.reshape((len(timeseries), 1))
+# train the standardization
+scaler = StandardScaler()
+scaler = scaler.fit(timeseries)
+print('Mean: %f, StandardDeviation: %f' % (scaler.mean_, sqrt(scaler.var_)))
+# standardization the dataset
+timeseries = scaler.transform(timeseries)
+
 total_len = int(len(timeseries)*0.1)  # 10 % of datas for test
 train_size = int(len(timeseries[:total_len]) * 0.70)
 test_size = len(timeseries[:total_len]) - train_size
