@@ -133,14 +133,14 @@ def create_dataset(dataset, lookback, lookforward):
         y.append(target)
     X = np.array(X)
     y = np.array(y)
-    return torch.tensor(X, dtype=torch.double), torch.tensor(y, dtype=torch.double)
+    return torch.tensor(X, dtype=torch.half), torch.tensor(y, dtype=torch.half)
 
 
 path = os.path.join(args.root_path, args.data_path)
 column = args.target
 
 df = pd.read_csv(path)
-timeseries = df[[column]].values.astype('double')
+timeseries = df[[column]].values.astype('half')
 # prepare data for standardization
 timeseries = timeseries.reshape((len(timeseries), 1))
 # train the standardization
@@ -172,8 +172,8 @@ train_dataset = MyDatas(X_train, y_train)
 test_dataset = MyDatas(X_test, y_test)
 train_loader = DataLoader(train_dataset, shuffle=True,
                           batch_size=int(args.batch_size))
-test_loader = DataLoader(test_dataset, shuffle=True,
-                         batch_size=int(args.batch_size))
+# test_loader = DataLoader(test_dataset, shuffle=True,
+#                          batch_size=int(args.batch_size))
 
 # X_train = X_train.to(args.gpu)
 # y_train = y_train.to(args.gpu)
@@ -195,7 +195,7 @@ loss_fn2 = nn.L1Loss()
 #     X_train, y_train), shuffle=True, batch_size=int(args.batch_size))
 
 n_epochs = int(args.num_epochs)
-model.double()
+model.half()
 for epoch in range(n_epochs):
     model.train()
     for X_batch, y_batch in train_loader:
