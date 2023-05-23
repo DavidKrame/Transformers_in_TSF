@@ -148,6 +148,10 @@ X_train, y_train = create_dataset(
 X_test, y_test = create_dataset(
     test, lookback=lookback, lookforward=lookforward)
 
+X_train = X_train.to(args.gpu)
+y_train = y_train.to(args.gpu)
+X_test = X_test.to(args.gpu)
+y_test = y_test.to(args.gpu)
 
 # set up DataLoader for training set
 train_dataset = MyDatas(X_train, y_train)
