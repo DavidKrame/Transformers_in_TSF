@@ -82,6 +82,10 @@ else:
     device = "cpu"
     args.gpu = torch.device(device)
 
+device = "cpu"
+args.gpu = torch.device(device)
+
+
 print("WORK USING {}".format(args.gpu))
 
 print('Args :')
