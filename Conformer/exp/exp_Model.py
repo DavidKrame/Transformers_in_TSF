@@ -263,7 +263,7 @@ class Exp_Model(Exp_Basic):
         for i, (batch_x, batch_y, batch_x_mark, batch_y_mark, batch_y_in) in enumerate(pred_loader):
             true, sample = self._process_one_batch(
                 pred_data, batch_x, batch_y, batch_x_mark, batch_y_mark, batch_y_in)
-            preds.append(pred.detach().cpu().numpy())
+            preds.append(sample.detach().cpu().numpy())
 
         preds = np.array(preds)
         preds = preds.reshape(-1, preds.shape[-2], preds.shape[-1])
