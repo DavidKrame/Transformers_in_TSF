@@ -133,14 +133,14 @@ def create_dataset(dataset, lookback, lookforward):
         y.append(target)
     X = np.array(X)
     y = np.array(y)
-    return torch.tensor(X, dtype=torch.half), torch.tensor(y, dtype=torch.half)
+    return torch.tensor(X, dtype=torch.float), torch.tensor(y, dtype=torch.float)
 
 
 path = os.path.join(args.root_path, args.data_path)
 column = args.target
 
 df = pd.read_csv(path)
-timeseries = df[[column]].values.astype('half')
+timeseries = df[[column]].values.astype('float')
 # prepare data for standardization
 timeseries = timeseries.reshape((len(timeseries), 1))
 # train the standardization
@@ -175,11 +175,6 @@ train_loader = DataLoader(train_dataset, shuffle=True,
 # test_loader = DataLoader(test_dataset, shuffle=True,
 #                          batch_size=int(args.batch_size))
 
-# X_train = X_train.to(args.gpu)
-# y_train = y_train.to(args.gpu)
-# X_test = X_test.to(args.gpu)
-# y_test = y_test.to(args.gpu)
-
 num_hidden_neurons = int(args.num_neurons)
 
 AirModel = nn.Sequential()
@@ -195,7 +190,7 @@ loss_fn2 = nn.L1Loss()
 #     X_train, y_train), shuffle=True, batch_size=int(args.batch_size))
 
 n_epochs = int(args.num_epochs)
-model.half()
+model.float()
 for epoch in range(n_epochs):
     model.train()
     for X_batch, y_batch in train_loader:
