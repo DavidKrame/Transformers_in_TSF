@@ -5,7 +5,7 @@ import os
 import torch
 import numpy as np
 import random
-from exp.exp_Model import Exp_Model
+from exp.exp_Model_SIRN import Exp_Model
 
 fix_seed = 2022
 random.seed(fix_seed)
@@ -13,7 +13,7 @@ torch.manual_seed(fix_seed)
 np.random.seed(fix_seed)
 
 parser = argparse.ArgumentParser(
-    description='Conformer for Very Long Sequences Forecasting')
+    description='TRANS_LEARN : Conformer for Very Long Sequences Forecasting')
 
 parser.add_argument('--model', type=str, default='Model',
                     help='model of experiment, options: [informer, informerstack, informerlight(TBD)]')
@@ -145,7 +145,7 @@ print('Args in experiment:')
 print(args)
 Exp = Exp_Model
 
-pred_length = [96, 192, 384, 768]
+pred_length = [96, 192]
 for i in range(len(pred_length)):
     all_mse = []
     all_mae = []

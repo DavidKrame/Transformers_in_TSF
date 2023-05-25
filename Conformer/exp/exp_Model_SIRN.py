@@ -58,6 +58,19 @@ class Exp_Model(Exp_Basic):
                 self.args.mix,
                 self.device
             ).float()
+        # TRY WITH CHECKPOINT SIRN MANUALLY ADDED
+
+        model.load_state_dict(torch.load(
+            os.path.join('./checkpoints_SIRN/checkpoint.pth')))
+        # FREEZING
+        model.distribution_dec_mu.weight.requires_grad = False
+        model.distribution_dec_mu.bias.requires_grad = False
+        model.distribution_dec_presigma.weight.requires_grad = False
+        model.distribution_dec_presigma.requires_grad = False
+        model.distribution_enc_mu.weight.requires_grad = False
+        model.distribution_enc_mu.requires_grad = False
+        model.distribution_enc_presigma.weight.requires_grad = False
+        model.distribution_enc_presigma.requires_grad = False
 
         if self.args.use_multi_gpu and self.args.use_gpu:
             model = nn.DataParallel(model, device_ids=self.args.device_ids)
