@@ -157,7 +157,7 @@ for i in range(len(pred_length)):
                                                                                                                                                           args.d_model, args.n_heads, args.e_layers, args.d_layers, args.normal_layers, args.enc_lstm, args.dec_lstm, args.weight, args.window, args.d_ff, args.attn,
                                                                                                                                                           args.embed, args.distil, args.mix, args.des, ii)
 
-        exp = Exp(args)  # set experiments
+        exp = Exp(args, setting)  # set experiments
         print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
         exp.train(setting)
 

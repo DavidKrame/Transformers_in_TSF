@@ -22,8 +22,8 @@ warnings.filterwarnings('ignore')
 
 
 class Exp_Model(Exp_Basic):
-    def __init__(self, args):
-        super(Exp_Model, self).__init__(args)
+    def __init__(self, args, setting):
+        super(Exp_Model, self).__init__(args, setting)
 
     def _build_model(self):
         model_dict = {
@@ -61,14 +61,9 @@ class Exp_Model(Exp_Basic):
 
         """"BEGIN OF TEST"""
 
-        setting = '{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_normal{}_elstm{}_dlstm{}_weight{}_window{}_df{}_at{}_eb{}_dt{}_mx{}_{}_{}'.format(args.model, args.data_path, args.features,
-                                                                                                                                                          args.seq_len, args.label_len, args.pred_len, args.step_len,
-                                                                                                                                                          args.d_model, args.n_heads, args.e_layers, args.d_layers, args.normal_layers, args.enc_lstm, args.dec_lstm, args.weight, args.window, args.d_ff, args.attn,
-                                                                                                                                                          args.embed, args.distil, args.mix, args.des, ii)
-
         # TRY WITH CHECKPOINT SIRN MANUALLY ADDED
         model.load_state_dict(torch.load(
-            os.path.join('./checkpoints_SIRN/init/', setting, 'checkpoint.pth')))
+            os.path.join('./checkpoints_SIRN/init/', self.setting, 'checkpoint.pth')))
         # FREEZING
         model.distribution_dec_mu.weight.requires_grad = False
         model.distribution_dec_mu.bias.requires_grad = False
