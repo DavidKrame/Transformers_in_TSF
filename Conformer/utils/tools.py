@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import os
 
 
 def adjust_learning_rate(optimizer, epoch, args):
@@ -88,8 +89,12 @@ class EarlyStopping:
         if self.verbose:
             print(
                 f'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...')
-        torch.save(model.state_dict(), path_train+'checkpoint.pth')
-        torch.save(model.state_dict(), path_load+'checkpoint.pth')
+        # torch.save(model.state_dict(), path_train+'checkpoint.pth')
+        # torch.save(model.state_dict(), path_load+'checkpoint.pth')
+        torch.save(model.state_dict(), os.path.join(
+            path_train, 'checkpoint.pth'))
+        torch.save(model.state_dict(), os.path.join(
+            path_load, 'checkpoint.pth'))
         self.val_loss_min = val_loss
 
 
