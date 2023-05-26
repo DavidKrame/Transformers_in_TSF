@@ -21,9 +21,10 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-class Exp_Model(Exp_Basic):
+class Exp_Model:
     def __init__(self, args, setting):
-        super(Exp_Model, self).__init__(args, setting)
+        self.args = args
+        self.setting = setting
 
     def _build_model(self):
         model_dict = {
