@@ -156,9 +156,17 @@ class Exp_Model(Exp_Basic):
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
 
-        path = os.path.join(self.args.checkpoints, setting)
-        if not os.path.exists(path):
-            os.makedirs(path)
+        # path = os.path.join(self.args.checkpoints, setting)
+        # if not os.path.exists(path):
+        #     os.makedirs(path)
+        path_train = os.path.join('./checkpoints_SIRN/in_process/', setting)
+        path_load = os.path.join('./checkpoints_SIRN/init/', setting)
+
+        if not os.path.exists(path_train):
+            os.makedirs(path_train)
+        if not os.path.exists(path_load):
+            os.makedirs(path_load)
+
         time_now = time.time()
         train_steps = len(train_loader)
         early_stopping = EarlyStopping(
@@ -207,7 +215,7 @@ class Exp_Model(Exp_Basic):
             test_loss = self.vali(test_data, test_loader, criterion)
             print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Test Loss: {4:.7f}".format(
                 epoch + 1, train_steps, train_loss, vali_loss, test_loss))
-            early_stopping(vali_loss, self.model, path)
+            early_stopping(vali_loss, self.model, path_train, path_load)
             updatehidden = early_stopping.updatehidden
             if early_stopping.early_stop:
                 print("Early stopping")
@@ -215,7 +223,7 @@ class Exp_Model(Exp_Basic):
 
             adjust_learning_rate(model_optim, epoch+1, self.args)
 
-        best_model_path = path+'/'+'checkpoint.pth'
+        best_model_path = path_train+'/'+'checkpoint.pth'
         self.model.load_state_dict(torch.load(best_model_path))
 
         return self.model

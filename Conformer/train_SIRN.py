@@ -145,7 +145,7 @@ print('Args in experiment:')
 print(args)
 Exp = Exp_Model
 
-pred_length = [96, 192]
+pred_length = [96, 192, 384, 768]
 for i in range(len(pred_length)):
     all_mse = []
     all_mae = []

@@ -2,7 +2,7 @@ from data.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custo
 from exp.exp_basic import Exp_Basic
 from models.model import Model
 
-from utils.tools import EarlyStopping, adjust_learning_rate
+from utils.tools import EarlyStopping_SIRN, adjust_learning_rate
 from utils.metrics import metric
 from utils.metrics import RMSE
 
@@ -58,10 +58,17 @@ class Exp_Model(Exp_Basic):
                 self.args.mix,
                 self.device
             ).float()
-        # TRY WITH CHECKPOINT SIRN MANUALLY ADDED
 
+        """"BEGIN OF TEST"""
+
+        setting = '{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_normal{}_elstm{}_dlstm{}_weight{}_window{}_df{}_at{}_eb{}_dt{}_mx{}_{}_{}'.format(args.model, args.data_path, args.features,
+                                                                                                                                                          args.seq_len, args.label_len, args.pred_len, args.step_len,
+                                                                                                                                                          args.d_model, args.n_heads, args.e_layers, args.d_layers, args.normal_layers, args.enc_lstm, args.dec_lstm, args.weight, args.window, args.d_ff, args.attn,
+                                                                                                                                                          args.embed, args.distil, args.mix, args.des, ii)
+
+        # TRY WITH CHECKPOINT SIRN MANUALLY ADDED
         model.load_state_dict(torch.load(
-            os.path.join('./checkpoints_SIRN/checkpoint.pth')))
+            os.path.join('./checkpoints_SIRN/init/', setting, 'checkpoint.pth')))
         # FREEZING
         model.distribution_dec_mu.weight.requires_grad = False
         model.distribution_dec_mu.bias.requires_grad = False
@@ -169,12 +176,15 @@ class Exp_Model(Exp_Basic):
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
 
-        path = os.path.join(self.args.checkpoints, setting)
-        if not os.path.exists(path):
-            os.makedirs(path)
+        # path = os.path.join(self.args.checkpoints, setting)
+        path_train = os.path.join('./checkpoints_SIRN/in_process/', setting)
+
+        if not os.path.exists(path_train):
+            os.makedirs(path_train)
+
         time_now = time.time()
         train_steps = len(train_loader)
-        early_stopping = EarlyStopping(
+        early_stopping = EarlyStopping_SIRN(
             patience=self.args.patience, verbose=True)
 
         model_optim = self._select_optimizer()
@@ -220,7 +230,10 @@ class Exp_Model(Exp_Basic):
             test_loss = self.vali(test_data, test_loader, criterion)
             print("Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} Test Loss: {4:.7f}".format(
                 epoch + 1, train_steps, train_loss, vali_loss, test_loss))
-            early_stopping(vali_loss, self.model, path)
+
+            """NEW EARLY_STOP"""
+            early_stopping(vali_loss, self.model, path_train)
+
             updatehidden = early_stopping.updatehidden
             if early_stopping.early_stop:
                 print("Early stopping")
@@ -228,7 +241,7 @@ class Exp_Model(Exp_Basic):
 
             adjust_learning_rate(model_optim, epoch+1, self.args)
 
-        best_model_path = path+'/'+'checkpoint.pth'
+        best_model_path = path_train+'/'+'checkpoint.pth'
         self.model.load_state_dict(torch.load(best_model_path))
 
         return self.model
