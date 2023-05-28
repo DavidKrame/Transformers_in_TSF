@@ -38,4 +38,11 @@ To use a model trained on one dataset (_ETTh1_ by default) to predict another da
 sh scripts/Conformer/Conformer_Cross_Training.sh
 ```  
 
+We can also train models with reduced datas, using :
+```sh
+sh scripts/Conformer/Conformer_Reduced.sh
+```  
+But, in order to do that, you have to put trained models in an appropriate folder (checkpoint folder) or firstly train models with `sh scripts/Conformer/Conformer.sh` by reducing __num_epochs__ in *conformer.sh* file.
+
+
 The results will be in **logs** directory.
