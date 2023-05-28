@@ -15,6 +15,12 @@ np.random.seed(fix_seed)
 parser = argparse.ArgumentParser(
     description='TRANS_LEARN : Conformer_PREDICTION WITHOUT TRAINING')
 
+parser.add_argument('--original_model', type=str,
+                    default='ETTh1.csv', help='Model initially used for training process')  # Change the file name if necessary
+parser.add_argument('--with_reduced_train', type=bool, default=False,
+                    help='Do training on reduced dataset or only test ? (do training if True)')
+
+
 parser.add_argument('--model', type=str, default='Model',
                     help='model of experiment, options: [informer, informerstack, informerlight(TBD)]')
 parser.add_argument('--data', type=str, default='elec', help='data')
@@ -22,10 +28,6 @@ parser.add_argument('--root_path', type=str,
                     default='./datataset', help='root path of the data file')
 parser.add_argument('--data_path', type=str,
                     default='ETTh1.csv', help='data file')  # Change the file name if necessary
-
-parser.add_argument('--original_model', type=str,
-                    default='ETTh1.csv', help='Model initially used for training process')  # Change the file name if necessary
-
 
 parser.add_argument('--features', type=str, default='S',
                     help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
@@ -163,15 +165,29 @@ for i in range(len(pred_length)):
                                                                                                                                                           args.embed, args.distil, args.mix, args.des, ii)
 
         exp = Exp(args, setting)
+        if (args.with_reduced_train):
+            print(
+                '>>>>>>>start reduced_training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
+            exp.train(setting)
 
-        print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
-        mae, mse = exp.test(setting)
-        all_mae.append(mae)
-        all_mse.append(mse)
-    # if args.do_predict:
-    #    print('>>>>>>>predicting : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
-    #    exp.predict(setting, True)
-        torch.cuda.empty_cache()
+            if args.do_test:
+                print(
+                    '>>>>>>>Reduced_testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
+                mae, mse = exp.test(setting)
+                all_mae.append(mae)
+                all_mse.append(mse)
+            torch.cuda.empty_cache()
+
+        else:
+            print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
+            mae, mse = exp.test(setting)
+            all_mae.append(mae)
+            all_mse.append(mse)
+        # if args.do_predict:
+        #    print('>>>>>>>predicting : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
+        #    exp.predict(setting, True)
+            torch.cuda.empty_cache()
+
     print("MEANs :")
     print(np.mean(np.array(all_mse)), np.mean(np.array(all_mae)))
     print("STDs :")

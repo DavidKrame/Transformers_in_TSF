@@ -1,4 +1,4 @@
-from data.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred, Dataset_elec, Dataset_airdelay
+from data.data_loader import Reduced_dataset_elec, Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred, Dataset_elec, Dataset_airdelay
 from exp.exp_basic import Exp_Basic
 from models.model import Model
 
@@ -95,15 +95,15 @@ class Exp_Model:
     def _get_data(self, flag):
         args = self.args
         data_dict = {
-            'ETTh1': Dataset_elec,
-            'ETTh2': Dataset_elec,
-            'ETTm1': Dataset_elec,
-            'ETTm2': Dataset_elec,
-            'WTH': Dataset_elec,
-            'TRAF': Dataset_elec,
-            'EXCH': Dataset_elec,
-            'ECL': Dataset_elec,
-            'elec': Dataset_elec,
+            'ETTh1': Reduced_dataset_elec,
+            'ETTh2': Reduced_dataset_elec,
+            'ETTm1': Reduced_dataset_elec,
+            'ETTm2': Reduced_dataset_elec,
+            'WTH': Reduced_dataset_elec,
+            'TRAF': Reduced_dataset_elec,
+            'EXCH': Reduced_dataset_elec,
+            'ECL': Reduced_dataset_elec,
+            'elec': Reduced_dataset_elec,
             'air': Dataset_airdelay,
         }
         Data = data_dict[self.args.data]
