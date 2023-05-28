@@ -33,9 +33,9 @@ After and only after `sh scripts/Conformer/Conformer.sh`, you can use the obtain
 sh scripts/Conformer/Conformer_SIRN.sh
 ```
 
-To use a model trained on one dataset (__ETTh1__ by default) to predict another dataset, use :
+To use a model trained on one dataset (_ETTh1_ by default) to predict another dataset, use :
 ```sh
 sh scripts/Conformer/Conformer_Cross_Training.sh
-```sh  
+```  
 
 The results will be in **logs** directory.
