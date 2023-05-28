@@ -22,6 +22,11 @@ parser.add_argument('--root_path', type=str,
                     default='./datataset', help='root path of the data file')
 parser.add_argument('--data_path', type=str,
                     default='ETTh1.csv', help='data file')  # Change the file name if necessary
+
+parser.add_argument('--original_model', type=str,
+                    default='ETTh1.csv', help='Model initially used for training process')  # Change the file name if necessary
+
+
 parser.add_argument('--features', type=str, default='S',
                     help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
 parser.add_argument('--target', type=str, default='OT',
@@ -152,7 +157,7 @@ for i in range(len(pred_length)):
     args.pred_len = pred_length[i]
     for ii in range(args.itr):
         # setting record of experiments
-        setting = '{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_normal{}_elstm{}_dlstm{}_weight{}_window{}_df{}_at{}_eb{}_dt{}_mx{}_{}_{}'.format(args.model, args.data_path, args.features,
+        setting = '{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_normal{}_elstm{}_dlstm{}_weight{}_window{}_df{}_at{}_eb{}_dt{}_mx{}_{}_{}'.format(args.model, args.original_model, args.features,
                                                                                                                                                           args.seq_len, args.label_len, args.pred_len, args.step_len,
                                                                                                                                                           args.d_model, args.n_heads, args.e_layers, args.d_layers, args.normal_layers, args.enc_lstm, args.dec_lstm, args.weight, args.window, args.d_ff, args.attn,
                                                                                                                                                           args.embed, args.distil, args.mix, args.des, ii)

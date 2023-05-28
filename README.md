@@ -27,6 +27,9 @@ To train them all on **Conformer**, use :
 ```sh
 sh scripts/Conformer/Conformer.sh
 ```
-
+To use a model trained on one dataset (__ETTh1__ by default) to predict another dataset, use :
+```sh
+sh scripts/Conformer/Conformer_Cross_Training.sh
+```sh  
 
 The results will be in **logs** directory.
