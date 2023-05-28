@@ -27,6 +27,12 @@ To train them all on **Conformer**, use :
 ```sh
 sh scripts/Conformer/Conformer.sh
 ```
+
+After and only after `sh scripts/Conformer/Conformer.sh`, you can use the obtained models to train `Conformer` by frozen `SIRN` module. For that, use :
+```sh
+sh scripts/Conformer/Conformer_SIRN.sh
+```
+
 To use a model trained on one dataset (__ETTh1__ by default) to predict another dataset, use :
 ```sh
 sh scripts/Conformer/Conformer_Cross_Training.sh
