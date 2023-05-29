@@ -9,7 +9,7 @@ fi
 model_name="Conformer"
 seq_len=96
 initial_training_data=ETTh1.csv
-with_reduced_train=False
+with_reduced_train=0
 
 python -u ./Conformer/Cross_prediction.py \
     --data ETTh1 \

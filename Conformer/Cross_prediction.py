@@ -17,8 +17,8 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('--original_model', type=str,
                     default='ETTh1.csv', help='Model initially used for training process')  # Change the file name if necessary
-parser.add_argument('--with_reduced_train', type=bool, default=False,
-                    help='Do training on reduced dataset or only test ? (do training if True)')
+parser.add_argument('--with_reduced_train', type=int, default=0,
+                    help='Do training on reduced dataset or only test ? (do training if 1)')
 
 
 parser.add_argument('--model', type=str, default='Model',
@@ -165,9 +165,9 @@ for i in range(len(pred_length)):
                                                                                                                                                           args.embed, args.distil, args.mix, args.des, ii)
 
         exp = Exp(args, setting)
-        if (args.with_reduced_train):
+        if (int(args.with_reduced_train) == 1):
             print(
-                '>>>>>>>start reduced_training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
+                '>>>>>>>Reduced_training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
             exp.train(setting)
 
             if args.do_test:
@@ -178,8 +178,9 @@ for i in range(len(pred_length)):
                 all_mse.append(mse)
             torch.cuda.empty_cache()
 
-        else:
-            print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
+        elif (int(args.with_reduced_train) == 0):
+            print(
+                '>>>>>>>Cross_testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
             mae, mse = exp.test(setting)
             all_mae.append(mae)
             all_mse.append(mse)
@@ -187,6 +188,8 @@ for i in range(len(pred_length)):
         #    print('>>>>>>>predicting : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
         #    exp.predict(setting, True)
             torch.cuda.empty_cache()
+        else:
+            pass
 
     print("MEANs :")
     print(np.mean(np.array(all_mse)), np.mean(np.array(all_mae)))

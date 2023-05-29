@@ -21,9 +21,23 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-class Exp_Model(Exp_Basic):
-    def __init__(self, args):
-        super(Exp_Model, self).__init__(args)
+class Exp_Model:
+    def __init__(self, args, setting):
+        self.args = args
+        self.setting = setting
+        self.device = self._acquire_device()
+        self.model = self._build_model().to(self.device)
+
+    def _acquire_device(self):
+        if self.args.use_gpu:
+            os.environ["CUDA_VISIBLE_DEVICES"] = str(
+                self.args.gpu) if not self.args.use_multi_gpu else self.args.devices
+            device = torch.device('cuda:{}'.format(self.args.gpu))
+            print('Use GPU: cuda:{}'.format(self.args.gpu))
+        else:
+            device = torch.device('cpu')
+            print('Use CPU')
+        return device
 
     def _build_model(self):
         model_dict = {
@@ -58,6 +72,12 @@ class Exp_Model(Exp_Basic):
                 self.args.mix,
                 self.device
             ).float()
+
+        """"BEGIN OF TEST"""
+
+        # TRY WITH CHECKPOINT SIRN MANUALLY ADDED
+        model.load_state_dict(torch.load(
+            os.path.join('./checkpoints_SIRN/init/', self.setting, 'checkpoint.pth')))
 
         if self.args.use_multi_gpu and self.args.use_gpu:
             model = nn.DataParallel(model, device_ids=self.args.device_ids)
