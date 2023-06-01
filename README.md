@@ -37,7 +37,7 @@ To use a model trained on one dataset (_ETTh1_ by default) to predict another da
 ```sh
 sh scripts/Conformer/Conformer_Cross_Prediction.sh
 ```  
-This script is also usable to complete a cross training with reduced datas. To do that, it will be necessary to turn `with_reduced_train` parameter to `True` in *Conformer_Cross_Prediction.sh* file.
+This script is also usable to complete a cross training with reduced datas. To do that, it will be necessary to turn `with_reduced_train` parameter to `1` (True) in *Conformer_Cross_Prediction.sh* file.
 
 We can also train models with reduced datas, using :
 ```sh
