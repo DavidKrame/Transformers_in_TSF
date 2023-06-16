@@ -5,7 +5,8 @@ import os
 import torch
 import numpy as np
 import random
-from exp.exp_Model_Reduced import Exp_Model
+import time
+from exp.exp_Model_Elec1 import Exp_Model
 
 fix_seed = 2022
 random.seed(fix_seed)
@@ -260,6 +261,7 @@ Exp = Exp_Model
 
 pred_length = [96, 192, 384, 768]
 for i in range(len(pred_length)):
+    time_begin = time.time()
     all_mse = []
     all_mae = []
     args.pred_len = pred_length[i]
@@ -310,3 +312,6 @@ for i in range(len(pred_length)):
     print(np.mean(np.array(all_mse)), np.mean(np.array(all_mae)))
     print("STDs :")
     print(np.std(np.array(all_mse)), np.std(np.array(all_mae)))
+    time_end = time.time()
+    total_time = time_end - time_begin
+    print("TOTAL_TIME : {}".format(total_time))
