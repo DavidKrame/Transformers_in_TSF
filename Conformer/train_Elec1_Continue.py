@@ -264,12 +264,15 @@ for i in range(len(pred_length)):
     time_begin = time.time()
     all_mse = []
     all_mae = []
+    data_pth = str(args.data_path)
+    data_pth = data_pth[:-8]
+    data_pth = data_pth + ".csv"
     args.pred_len = pred_length[i]
     for ii in range(args.itr):
         # setting record of experiments
         setting = "{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_normal{}_elstm{}_dlstm{}_weight{}_window{}_df{}_at{}_eb{}_dt{}_mx{}_{}_{}".format(
             args.model,
-            args.data_path,
+            data_pth,
             args.features,
             args.seq_len,
             args.label_len,
