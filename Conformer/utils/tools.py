@@ -5,18 +5,15 @@ import os
 
 def adjust_learning_rate(optimizer, epoch, args):
     # lr = args.learning_rate * (0.2 ** (epoch // 2))
-    if args.lradj == 'type1':
-        lr_adjust = {epoch: args.learning_rate * (0.5 ** ((epoch-1) // 1))}
-    elif args.lradj == 'type2':
-        lr_adjust = {
-            2: 5e-5, 4: 1e-5, 6: 5e-6, 8: 1e-6,
-            10: 5e-7, 15: 1e-7, 20: 5e-8
-        }
+    if args.lradj == "type1":
+        lr_adjust = {epoch: args.learning_rate * (0.5 ** ((epoch - 1) // 1))}
+    elif args.lradj == "type2":
+        lr_adjust = {2: 5e-5, 4: 1e-5, 6: 5e-6, 8: 1e-6, 10: 5e-7, 15: 1e-7, 20: 5e-8}
     if epoch in lr_adjust.keys():
         lr = lr_adjust[epoch]
         for param_group in optimizer.param_groups:
-            param_group['lr'] = lr
-        print('Updating learning rate to {}'.format(lr))
+            param_group["lr"] = lr
+        print("Updating learning rate to {}".format(lr))
 
 
 class EarlyStopping_SIRN:
@@ -38,8 +35,7 @@ class EarlyStopping_SIRN:
         elif score < self.best_score + self.delta:
             self.counter += 1
             self.updatehidden = False
-            print(
-                f'EarlyStopping counter: {self.counter} out of {self.patience}')
+            print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
             if self.counter >= self.patience:
                 self.early_stop = True
         else:
@@ -51,8 +47,9 @@ class EarlyStopping_SIRN:
     def save_checkpoint(self, val_loss, model, path_train):
         if self.verbose:
             print(
-                f'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...')
-        torch.save(model.state_dict(), path_train+'checkpoint.pth')
+                f"Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ..."
+            )
+        torch.save(model.state_dict(), path_train + "/" + "checkpoint.pth")
         self.val_loss_min = val_loss
 
 
@@ -75,8 +72,7 @@ class EarlyStopping:
         elif score < self.best_score + self.delta:
             self.counter += 1
             self.updatehidden = False
-            print(
-                f'EarlyStopping counter: {self.counter} out of {self.patience}')
+            print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
             if self.counter >= self.patience:
                 self.early_stop = True
         else:
@@ -88,43 +84,55 @@ class EarlyStopping:
     def save_checkpoint(self, val_loss, model, path_train, path_load):
         if self.verbose:
             print(
-                f'Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...')
+                f"Validation loss decreased ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ..."
+            )
         # torch.save(model.state_dict(), path_train+'checkpoint.pth')
         # torch.save(model.state_dict(), path_load+'checkpoint.pth')
-        torch.save(model.state_dict(), os.path.join(
-            path_train, 'checkpoint.pth'))
-        torch.save(model.state_dict(), os.path.join(
-            path_load, 'checkpoint.pth'))
+        torch.save(model.state_dict(), os.path.join(path_train, "checkpoint.pth"))
+        torch.save(model.state_dict(), os.path.join(path_load, "checkpoint.pth"))
         self.val_loss_min = val_loss
 
 
 class dotdict(dict):
     """dot.notation access to dictionary attributes"""
+
     __getattr__ = dict.get
     __setattr__ = dict.__setitem__
     __delattr__ = dict.__delitem__
 
 
-class StandardScaler():
+class StandardScaler:
     def __init__(self):
-        self.mean = 0.
-        self.std = 1.
+        self.mean = 0.0
+        self.std = 1.0
 
     def fit(self, data):
         self.mean = data.mean(0)
         self.std = data.std(0)
-        #print(self.mean, self.std, data.max(0), data.min(0))
+        # print(self.mean, self.std, data.max(0), data.min(0))
 
     def transform(self, data):
-        mean = torch.from_numpy(self.mean).type_as(data).to(
-            data.device) if torch.is_tensor(data) else self.mean
-        std = torch.from_numpy(self.std).type_as(data).to(
-            data.device) if torch.is_tensor(data) else self.std
+        mean = (
+            torch.from_numpy(self.mean).type_as(data).to(data.device)
+            if torch.is_tensor(data)
+            else self.mean
+        )
+        std = (
+            torch.from_numpy(self.std).type_as(data).to(data.device)
+            if torch.is_tensor(data)
+            else self.std
+        )
         return (data - mean) / std
 
     def inverse_transform(self, data):
-        mean = torch.from_numpy(self.mean).type_as(data).to(
-            data.device) if torch.is_tensor(data) else self.mean
-        std = torch.from_numpy(self.std).type_as(data).to(
-            data.device) if torch.is_tensor(data) else self.std
+        mean = (
+            torch.from_numpy(self.mean).type_as(data).to(data.device)
+            if torch.is_tensor(data)
+            else self.mean
+        )
+        std = (
+            torch.from_numpy(self.std).type_as(data).to(data.device)
+            if torch.is_tensor(data)
+            else self.std
+        )
         return (data * std) + mean
