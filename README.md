@@ -45,5 +45,20 @@ sh scripts/Conformer/Conformer_Reduced.sh
 ```  
 But, in order to do that, you have to put trained models in an appropriate folder (checkpoint folder) or firstly train models with `sh scripts/Conformer/Conformer.sh` by reducing __num_epochs__ in *conformer.sh* file.
 
+## For electricity_data (New procedure)
+```sh
+sh scripts/Conformer/electricity/Conformer.sh
+
+sh scripts/Conformer/electricity/ConformerOthers.sh
+
+sh scripts/Conformer/electricity/Conformer_Continue.sh
+
+sh scripts/Conformer/electricity/Conformer_Prediction_Elec1.sh
+
+sh scripts/Conformer/electricity/Conformer_Elec1_SIRN.sh
+```
+
+But, as said previously, be sure to put init models in the right place (folder `checkpoints_SIRN/init`) before lunching the 3 last scripts.
+
 
 The results will be in **logs** directory.
