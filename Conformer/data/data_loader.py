@@ -339,20 +339,30 @@ class Dataset_elec(Dataset):
                 12 * 30 * 24 * 4 + 2 * 30 * 24 * 4,
                 12 * 30 * 24 * 4 + 4 * 30 * 24 * 4,
             ]
-        elif self.data_set == "ETTh1":  # 12/2/2
+        elif self.data_set == "ETTh1":  # 12/4/4
             border1s = [
                 0,
                 12 * 30 * 24 - self.seq_len,
-                12 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
+                12 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
             ]
             border2s = [
                 12 * 30 * 24,
-                12 * 30 * 24 + 2 * 30 * 24,
                 12 * 30 * 24 + 4 * 30 * 24,
+                12 * 30 * 24 + 8 * 30 * 24,
             ]
-            # border1s = [0, 12*30*24*4 - self.seq_len,
-            #             12*30*24*4+1*30*24*4 - self.seq_len]
-            # border2s = [12*30*24*4, 12*30*24*4+1*30*24*4, 12*30*24*4+2*30*24*4]
+
+        elif self.data_set == "ETTh2":  # 12/4/4
+            border1s = [
+                0,
+                12 * 30 * 24 - self.seq_len,
+                12 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
+            ]
+            border2s = [
+                12 * 30 * 24,
+                12 * 30 * 24 + 4 * 30 * 24,
+                12 * 30 * 24 + 8 * 30 * 24,
+            ]
+
         else:
             border1s = [0, 16 * 365 - self.seq_len, 16 * 365 + 2 * 365 - self.seq_len]
             border2s = [16 * 365, 16 * 365 + 2 * 365, 16 * 365 + 4 * 365]
@@ -530,28 +540,28 @@ class Reduced_dataset_elec(Dataset):
                 4 * 30 * 24 * 4 + 2 * 30 * 24 * 4,
                 4 * 30 * 24 * 4 + 4 * 30 * 24 * 4,
             ]
-        elif self.data_set == "ETTh1":  # 12/4/4
+        elif self.data_set == "ETTh1":  # 4/2/2
             border1s = [
                 0,
-                12 * 30 * 24 - self.seq_len,
-                12 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
+                4 * 30 * 24 - self.seq_len,
+                4 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
             ]
             border2s = [
-                12 * 30 * 24,
-                12 * 30 * 24 + 4 * 30 * 24,
-                12 * 30 * 24 + 8 * 30 * 24,
+                4 * 30 * 24,
+                4 * 30 * 24 + 2 * 30 * 24,
+                4 * 30 * 24 + 4 * 30 * 24,
             ]
 
-        elif self.data_set == "ETTh2":  # 12/4/4
+        elif self.data_set == "ETTh2":  # 4/2/2
             border1s = [
                 0,
-                12 * 30 * 24 - self.seq_len,
-                12 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
+                4 * 30 * 24 - self.seq_len,
+                4 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
             ]
             border2s = [
-                12 * 30 * 24,
-                12 * 30 * 24 + 4 * 30 * 24,
-                12 * 30 * 24 + 8 * 30 * 24,
+                4 * 30 * 24,
+                4 * 30 * 24 + 2 * 30 * 24,
+                4 * 30 * 24 + 4 * 30 * 24,
             ]
 
         else:
