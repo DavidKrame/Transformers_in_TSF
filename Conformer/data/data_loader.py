@@ -285,13 +285,13 @@ class Dataset_elec(Dataset):
         if self.data_set == "elec":  # 12/2/2
             border1s = [
                 0,
-                12 * 30 * 24 * 4 - self.seq_len,
-                12 * 30 * 24 * 4 + 1 * 30 * 24 * 4 - self.seq_len,
+                12 * 30 * 24 - self.seq_len,
+                12 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
             ]
             border2s = [
-                12 * 30 * 24 * 4,
-                12 * 30 * 24 * 4 + 1 * 30 * 24 * 4,
-                12 * 30 * 24 * 4 + 2 * 30 * 24 * 4,
+                12 * 30 * 24,
+                12 * 30 * 24 + 2 * 30 * 24,
+                12 * 30 * 24 + 4 * 30 * 24,
             ]
         elif self.data_set == "ECL":  # 12/2/2
             border1s = [
@@ -487,13 +487,13 @@ class Reduced_dataset_elec(Dataset):
         if self.data_set == "elec":  # 4/1/1
             border1s = [
                 0,
-                4 * 30 * 24 * 4 - self.seq_len,
-                4 * 30 * 24 * 4 + 1 * 30 * 24 * 4 - self.seq_len,
+                4 * 30 * 24 - self.seq_len,
+                4 * 30 * 24 + 1 * 30 * 24 - self.seq_len,
             ]
             border2s = [
-                4 * 30 * 24 * 4,
-                4 * 30 * 24 * 4 + 1 * 30 * 24 * 4,
-                4 * 30 * 24 * 4 + 2 * 30 * 24 * 4,
+                4 * 30 * 24,
+                4 * 30 * 24 + 1 * 30 * 24,
+                4 * 30 * 24 + 2 * 30 * 24,
             ]
         elif self.data_set == "ECL":  # 3/1/1
             border1s = [
