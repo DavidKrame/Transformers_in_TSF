@@ -12,9 +12,9 @@ model_name="Conformer"
 seq_len=96
 
 python -u ./Conformer/train_Elec_Custom_Continue.py \
-    --data elec \
+    --data ETTh2 \
     --root_path ./dataset/ \
-    --data_path custom_elec_04.csv \
+    --data_path ETTh2.csv \
     --patience $patience\
     --target "OT" \
-    --train_epochs $train_epochs >logs/Conformer/$model_name'_Elec_Custom_Continue_01_on_04'.log
+    --train_epochs $train_epochs >logs/Conformer/$model_name'_ETTh_Continue_1_on_2'.log
