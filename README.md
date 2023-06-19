@@ -60,5 +60,21 @@ sh scripts/Conformer/electricity/Conformer_Elec1_SIRN.sh
 
 But, as said previously, be sure to put init models in the right place (folder `checkpoints_SIRN/init`) before lunching the 3 last scripts.
 
+## To be explained (later)
+```sh
+sh scripts/Conformer/etth_1_2/Conformer_Prediction_ETTh12.sh
+
+sh scripts/Conformer/elec_custom/Conformer_Prediction_Elec_Custom.sh
+
+sh scripts/Conformer/etth_1_2/Conformer_ETTh_1_2_SIRN.sh
+
+sh scripts/Conformer/elec_custom/Conformer_Elec_Cust_SIRN.sh
+
+sh scripts/Conformer/etth_1_2/Conformer_Continue.sh
+
+sh scripts/Conformer/elec_custom/Conformer_Continue.sh
+
+sh scripts/Conformer/elec_custom/Conformer.sh
+```
 
 The results will be in **logs** directory.
