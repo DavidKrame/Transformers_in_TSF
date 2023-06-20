@@ -1,3 +1,22 @@
+## TODAY (Elec_Custom)
+Firstly, we'll train with :
+```sh
+sh scripts/Conformer/elec_custom/Conformer.sh
+```
+After that, we have to manually save a copy of the `checkpoints_SIRN/init` folder (somewhere on the computer) and then launch :
+```sh
+sh scripts/Conformer/elec_custom/Conformer_Continue.sh
+```
+
+After, also save manually the content of `checkpoints_SIRN/init` somewhere on the computer and replace the content of this folder with that which was firstly saved. We have to launch then :
+```sh
+sh scripts/Conformer/elec_custom/Conformer_Elec_Cust_SIRN.sh
+```
+Finally, we will take again our first saved folder and put in `checkpoints_SIRN/init`. Then, type :
+```sh
+sh scripts/Conformer/elec_custom/Conformer_Prediction_Elec_Custom.sh
+```
+After each operation, we have to take a copy of `Logs` folder.
 ## EXEMPLES
 To train *NLinear* and *DLinear* on **ETTh1, ETTm1, electricity** and **weather** datasets, use :  
 ```sh

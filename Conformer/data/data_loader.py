@@ -282,16 +282,16 @@ class Dataset_elec(Dataset):
         """
         # border1s = [0, 12*30*24*4 - self.seq_len, 12*30*24*4+2*30*24*4 - self.seq_len]
         # border2s = [12*30*24*4, 12*30*24*4+2*30*24*4, 12*30*24*4+4*30*24*4]
-        if self.data_set == "elec":  # 12/2/2
+        if self.data_set == "elec":  # 48/5/5
             border1s = [
                 0,
-                12 * 30 * 24 - self.seq_len,
-                12 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
+                48 * 30 * 24 - self.seq_len,
+                48 * 30 * 24 + 5 * 30 * 24 - self.seq_len,
             ]
             border2s = [
-                12 * 30 * 24,
-                12 * 30 * 24 + 2 * 30 * 24,
-                12 * 30 * 24 + 4 * 30 * 24,
+                48 * 30 * 24,
+                48 * 30 * 24 + 5 * 30 * 24,
+                48 * 30 * 24 + 10 * 30 * 24,
             ]
         elif self.data_set == "ECL":  # 12/2/2
             border1s = [
