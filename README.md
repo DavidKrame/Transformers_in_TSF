@@ -1,3 +1,23 @@
+## For V_Transformer
+For Electricity Normal and OTH :
+```sh
+sh scripts/V_Transformer/electricity/V_T_Electricity.sh
+
+sh scripts/V_Transformer/electricity/V_T_Electricity_OTH.sh
+```
+For Elec_Custom 01 and 04 :
+```sh
+sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom01.sh
+
+sh scripts/V_Transformer/electricity/V_T_Elec_Custom04.sh
+```
+For ETTh1 and ETTh2 :
+```sh
+sh scripts/V_Transformer/etth_1_2/V_T_ETTh1.sh
+
+sh scripts/V_Transformer/etth_1_2/V_T_ETTh2.sh
+```
+
 ## TODAY (Elec_Custom)
 Firstly, we'll train with :
 ```sh

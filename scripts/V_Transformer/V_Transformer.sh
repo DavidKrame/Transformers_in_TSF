@@ -33,14 +33,14 @@ do
       --des 'Exp' \
       --itr 1  \
       --train_epochs 10 >logs/V_Transformer/$model_name'_Etth1'_$seq_len'_'$pred_len.log
-      
+
     python -u run_longExp.py \
       --is_training 1 \
       --root_path ./dataset/ \
-      --data_path ETTm1.csv \
-      --model_id ETTm1_96_$pred_len \
+      --data_path ETTh2.csv \
+      --model_id ETTh2_96_$pred_len \
       --model $model_name \
-      --data ETTm1 \
+      --data ETTh2 \
       --features M \
       --patience 10\
       --seq_len 96 \
@@ -54,8 +54,8 @@ do
       --c_out 7 \
       --des 'Exp' \
       --itr 1  \
-      --train_epochs 10 >logs/V_Transformer/$model_name'_Ettm1'_$seq_len'_'$pred_len.log
-
+      --train_epochs 10 >logs/V_Transformer/$model_name'_Etth2'_$seq_len'_'$pred_len.log
+      
     python -u run_longExp.py \
       --is_training 1 \
       --root_path ./dataset/ \
@@ -81,8 +81,8 @@ do
     python -u run_longExp.py \
       --is_training 1 \
       --root_path ./dataset/ \
-      --data_path weather.csv \
-      --model_id weather_96_$pred_len \
+      --data_path electricity_OTH.csv \
+      --model_id electricity_OTH_96_$pred_len \
       --model $model_name \
       --data custom \
       --features M \
@@ -93,12 +93,57 @@ do
       --e_layers 2 \
       --d_layers 1 \
       --factor 3 \
-      --enc_in 21 \
-      --dec_in 21 \
-      --c_out 21 \
+      --enc_in 321 \
+      --dec_in 321 \
+      --c_out 321 \
       --des 'Exp' \
       --itr 1 \
-      --train_epochs 10 >logs/V_Transformer/$model_name'_weather'_$seq_len'_'$pred_len.log
+      --train_epochs 10 >logs/V_Transformer/$model_name'_electricity_OTH'_$seq_len'_'$pred_len.log
+
+
+    python -u run_longExp.py \
+      --is_training 1 \
+      --root_path ./dataset/ \
+      --data_path custom_elec_01.csv \
+      --model_id custom_elec_01_96_$pred_len \
+      --model $model_name \
+      --data custom \
+      --features M \
+      --patience 10\
+      --seq_len 96 \
+      --label_len 48 \
+      --pred_len $pred_len \
+      --e_layers 2 \
+      --d_layers 1 \
+      --factor 3 \
+      --enc_in 321 \
+      --dec_in 321 \
+      --c_out 321 \
+      --des 'Exp' \
+      --itr 1 \
+      --train_epochs 10 >logs/V_Transformer/$model_name'_custom_elec_01'_$seq_len'_'$pred_len.log
+
+    python -u run_longExp.py \
+      --is_training 1 \
+      --root_path ./dataset/ \
+      --data_path custom_elec_04.csv \
+      --model_id custom_elec_04_96_$pred_len \
+      --model $model_name \
+      --data custom \
+      --features M \
+      --patience 10\
+      --seq_len 96 \
+      --label_len 48 \
+      --pred_len $pred_len \
+      --e_layers 2 \
+      --d_layers 1 \
+      --factor 3 \
+      --enc_in 321 \
+      --dec_in 321 \
+      --c_out 321 \
+      --des 'Exp' \
+      --itr 1 \
+      --train_epochs 10 >logs/V_Transformer/$model_name'_custom_elec_04'_$seq_len'_'$pred_len.log
 
 
 done
