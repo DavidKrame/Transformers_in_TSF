@@ -270,7 +270,7 @@ for i in range(len(pred_length)):
     args.pred_len = pred_length[i]
     for ii in range(args.itr):
         # setting record of experiments
-        setting = "{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_normal{}_elstm{}_dlstm{}_weight{}_window{}_df{}_at{}_eb{}_dt{}_mx{}_{}_{}".format(
+        setting = "{}_{}_ft{}_sl{}_ll{}_pl{}_step{}_dm{}_nh{}_el{}_dl{}_{}".format(
             args.model,
             data_pth,
             args.features,
@@ -282,17 +282,6 @@ for i in range(len(pred_length)):
             args.n_heads,
             args.e_layers,
             args.d_layers,
-            args.normal_layers,
-            args.enc_lstm,
-            args.dec_lstm,
-            args.weight,
-            args.window,
-            args.d_ff,
-            args.attn,
-            args.embed,
-            args.distil,
-            args.mix,
-            args.des,
             ii,
         )
 
