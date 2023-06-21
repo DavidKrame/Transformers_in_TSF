@@ -19,7 +19,7 @@ do
       --model_id ETTh2_96_$pred_len \
       --model $model_name \
       --data ETTh2 \
-      --features M \
+      --features S \
       --patience 10\
       --seq_len 96 \
       --label_len 48 \

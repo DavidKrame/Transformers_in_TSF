@@ -34,7 +34,7 @@ parser.add_argument(
 
 # data loader
 parser.add_argument(
-    "--data", type=str, required=True, default="ETTm1", help="dataset type"
+    "--data", type=str, required=True, default="ETTh1", help="dataset type"
 )
 parser.add_argument(
     "--root_path", type=str, default="./data/ETT/", help="root path of the data file"
