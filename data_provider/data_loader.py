@@ -55,6 +55,7 @@ class Dataset_ETT_hour(Dataset):
         self.scale = scale
         self.timeenc = timeenc
         self.freq = freq
+        self.train_only = train_only
 
         self.root_path = root_path
         self.data_path = data_path
