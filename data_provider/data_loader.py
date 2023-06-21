@@ -121,7 +121,7 @@ class Dataset_ETT_hour(Dataset):
         data_stamp = time_features(df_stamp, timeenc=self.timeenc, freq=self.freq)
 
         self.data_x = data[border1:border2]
-        if self.inverse:
+        if self.train_only:
             self.data_y = df_data.values[border1:border2]
         else:
             self.data_y = data[border1:border2]
