@@ -288,6 +288,7 @@ for i in range(len(pred_length)):
             args.d_layers,
             ii,
         )
+
         exp = Exp(args, setting)  # set experiments
         print(">>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>".format(setting))
         exp.train(setting)
