@@ -19,7 +19,7 @@ do
       --model_id custom_elec_04_96_$pred_len \
       --model $model_name \
       --data custom \
-      --features S \
+      --features MS \
       --patience 10\
       --seq_len 96 \
       --label_len 48 \
