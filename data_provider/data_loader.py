@@ -6,6 +6,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 from sklearn.preprocessing import StandardScaler
 from utils.timefeatures import time_features
+from utils.timefeatures2 import time_features as time_features2
 import warnings
 
 warnings.filterwarnings("ignore")
@@ -634,7 +635,7 @@ class Dataset_Custom_2(Dataset):
         # time_features(
         #         pd.to_datetime(df_stamp["date"].values), freq=self.freq
         #     )
-        data_stamp = time_features(df_stamp, freq=self.freq)
+        data_stamp = time_features2(df_stamp, timeenc=self.timeenc, freq=self.freq)
 
         self.data_x = data[border1:border2]
         if self.train_only:
