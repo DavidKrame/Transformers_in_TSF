@@ -15,8 +15,8 @@ do
     python -u run_longExp.py \
       --is_training 1 \
       --root_path ./dataset/ \
-      --data_path custom_elec_04.csv \
-      --model_id custom_elec_04_96_$pred_len \
+      --data_path V_T_custom_elec_04.csv \
+      --model_id V_T_custom_elec_04_96_$pred_len \
       --model $model_name \
       --data custom \
       --features MS \
