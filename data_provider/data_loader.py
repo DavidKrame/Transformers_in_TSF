@@ -623,17 +623,18 @@ class Dataset_Custom_2(Dataset):
         #     return self.scaler.inverse_transform(data)
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path, self.data_path))
-        # 12/2/2
+        #     # 48/5/5
         border1s = [
             0,
-            12 * 30 * 24 - self.seq_len,
-            12 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
+            48 * 30 * 24 - self.seq_len,
+            48 * 30 * 24 + 5 * 30 * 24 - self.seq_len,
         ]
         border2s = [
-            12 * 30 * 24,
-            12 * 30 * 24 + 2 * 30 * 24,
-            12 * 30 * 24 + 4 * 30 * 24,
+            48 * 30 * 24,
+            48 * 30 * 24 + 5 * 30 * 24,
+            48 * 30 * 24 + 10 * 30 * 24,
         ]
+
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
 
