@@ -631,22 +631,16 @@ class Dataset_Custom_2(Dataset):
 
         df_stamp = df_raw[["date"]][border1:border2]
         df_stamp["date"] = pd.to_datetime(df_stamp.date)
-        if self.timeenc == 0:
-            df_stamp["month"] = df_stamp.date.apply(lambda row: row.month, 1)
-            df_stamp["day"] = df_stamp.date.apply(lambda row: row.day, 1)
-            df_stamp["weekday"] = df_stamp.date.apply(lambda row: row.weekday(), 1)
-            df_stamp["hour"] = df_stamp.date.apply(lambda row: row.hour, 1)
-            df_stamp["minute"] = df_stamp.date.apply(lambda row: row.minute, 1)
-            df_stamp["minute"] = df_stamp.minute.map(lambda x: x // 15)
-            data_stamp = df_stamp.drop(["date"], 1).values
-        elif self.timeenc == 1:
-            data_stamp = time_features(
-                pd.to_datetime(df_stamp["date"].values), freq=self.freq
-            )
-            data_stamp = data_stamp.transpose(1, 0)
+        # time_features(
+        #         pd.to_datetime(df_stamp["date"].values), freq=self.freq
+        #     )
+        data_stamp = time_features(df_stamp, freq=self.freq)
 
         self.data_x = data[border1:border2]
-        self.data_y = data[border1:border2]
+        if self.train_only:
+            self.data_y = df_data.values[border1:border2]
+        else:
+            self.data_y = data[border1:border2]
         self.data_stamp = data_stamp
 
     def __getitem__(self, index):
