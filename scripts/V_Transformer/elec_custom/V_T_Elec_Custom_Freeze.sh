@@ -12,11 +12,11 @@ seq_len=96
 for pred_len in 96 192 384 768
 do
 
-    python -u train_Freeze_Elec.py \
+    python -u train_Freeze_Elec_Custom.py \
       --is_training 1 \
       --root_path ./dataset/ \
-      --data_path electricity_OTH.csv \
-      --model_id electricity_OTH_96_$pred_len \
+      --data_path custom_elec_04.csv \
+      --model_id custom_elec_04_96_$pred_len \
       --model $model_name \
       --data ECL \
       --features S \
@@ -32,6 +32,6 @@ do
       --c_out 1 \
       --des 'Exp' \
       --itr 1 \
-      --train_epochs 10 >logs/V_Transformer/$model_name'Freeze_elec_to_train_OTH'_$seq_len'_'$pred_len.log
+      --train_epochs 10 >logs/V_Transformer/$model_name'Freeze_Elec_Custom_01_for_train_04'_$seq_len'_'$pred_len.log
 
 done

@@ -12,15 +12,14 @@ seq_len=96
 for pred_len in 96 192 384 768
 do
 
-    python -u train_Freeze_Elec.py \
-      --is_training 1 \
+    python -u predict_ETTh.py \
+      --is_training 0 \
       --root_path ./dataset/ \
-      --data_path electricity_OTH.csv \
-      --model_id electricity_OTH_96_$pred_len \
+      --data_path ETTh2.csv \
+      --model_id ETTh2_96_$pred_len \
       --model $model_name \
-      --data ECL \
+      --data ETTh2 \
       --features S \
-      --patience 5\
       --seq_len 96 \
       --label_len 48 \
       --pred_len $pred_len \
@@ -30,8 +29,6 @@ do
       --enc_in 1 \
       --dec_in 1 \
       --c_out 1 \
-      --des 'Exp' \
-      --itr 1 \
-      --train_epochs 10 >logs/V_Transformer/$model_name'Freeze_elec_to_train_OTH'_$seq_len'_'$pred_len.log
+      --des 'Exp' >logs/V_Transformer/$model_name'_Predict_ETTh2_with_1'_$seq_len'_'$pred_len.log
 
 done

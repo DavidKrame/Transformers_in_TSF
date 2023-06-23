@@ -20,7 +20,7 @@ do
       --model $model_name \
       --data ETTh2 \
       --features S \
-      --patience 10\
+      --patience 5\
       --seq_len 96 \
       --label_len 48 \
       --pred_len $pred_len \

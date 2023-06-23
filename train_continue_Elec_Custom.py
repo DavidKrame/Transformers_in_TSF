@@ -1,7 +1,7 @@
 import argparse
 import os
 import torch
-from exp.exp_main import Exp_Main_Elec_Continue as Exp_Main
+from exp.exp_main import Exp_Main_Continue as Exp_Main
 import random
 import numpy as np
 
