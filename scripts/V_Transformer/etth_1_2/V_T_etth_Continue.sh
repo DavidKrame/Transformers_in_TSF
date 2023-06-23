@@ -19,7 +19,7 @@ do
       --model_id ETTh2_96_$pred_len \
       --model $model_name \
       --data ETTh2 \
-      --features MS \
+      --features S \
       --patience 2\
       --seq_len 96 \
       --label_len 48 \
@@ -27,9 +27,9 @@ do
       --e_layers 2 \
       --d_layers 1 \
       --factor 3 \
-      --enc_in 7 \
-      --dec_in 7 \
-      --c_out 7 \
+      --enc_in 1 \
+      --dec_in 1 \
+      --c_out 1 \
       --des 'Exp' \
       --itr 1 \
       --train_epochs 3 >logs/V_Transformer/$model_name'_Continue_ETTh1_on_2'_$seq_len'_'$pred_len.log
