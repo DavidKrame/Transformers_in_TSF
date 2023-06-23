@@ -18,7 +18,7 @@ do
       --data_path custom_elec_04.csv \
       --model_id custom_elec_04_96_$pred_len \
       --model $model_name \
-      --data ECL \
+      --data custom \
       --features S \
       --patience 5\
       --seq_len 96 \
