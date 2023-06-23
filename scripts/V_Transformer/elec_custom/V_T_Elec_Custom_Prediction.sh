@@ -29,6 +29,7 @@ do
       --enc_in 1 \
       --dec_in 1 \
       --c_out 1 \
+      --itr 1 \
       --des 'Exp' >logs/V_Transformer/$model_name'_Prediction_elec_custom_on_04'_$seq_len'_'$pred_len.log
 
 done
