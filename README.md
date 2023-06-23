@@ -1,3 +1,7 @@
+## For V_Trans AGAIN
+```sh
+sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom_Continue.sh
+```
 ## For V_Transformer
 For Electricity Normal and OTH :
 ```sh

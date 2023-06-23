@@ -32,6 +32,6 @@ do
       --c_out 321 \
       --des 'Exp' \
       --itr 1 \
-      --train_epochs 3 >logs/V_Transformer/$model_name'_electricity_OTH'_$seq_len'_'$pred_len.log
+      --train_epochs 3 >logs/V_Transformer/$model_name'_Continue_electricity_on_OTH'_$seq_len'_'$pred_len.log
 
 done

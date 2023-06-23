@@ -12,15 +12,15 @@ seq_len=96
 for pred_len in 96 192 384 768
 do
 
-    python -u run_longExp.py \
+    python -u train_continue_Elec_Custom.py \
       --is_training 1 \
       --root_path ./dataset/ \
-      --data_path electricity_OTH.csv \
-      --model_id electricity_OTH_96_$pred_len \
+      --data_path custom_elec_04.csv \
+      --model_id custom_elec_04_96_$pred_len \
       --model $model_name \
-      --data ECL \
+      --data custom \
       --features MS \
-      --patience 10\
+      --patience 2\
       --seq_len 96 \
       --label_len 48 \
       --pred_len $pred_len \
@@ -32,6 +32,6 @@ do
       --c_out 321 \
       --des 'Exp' \
       --itr 1 \
-      --train_epochs 10 >logs/V_Transformer/$model_name'Predict_elec_on_OTH'_$seq_len'_'$pred_len.log
+      --train_epochs 3 >logs/V_Transformer/$model_name'_Continue_elec_custom_on_04'_$seq_len'_'$pred_len.log
 
 done
