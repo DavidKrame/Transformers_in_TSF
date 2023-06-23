@@ -27,9 +27,9 @@ do
       --e_layers 2 \
       --d_layers 1 \
       --factor 3 \
-      --enc_in 321 \
-      --dec_in 321 \
-      --c_out 321 \
+      --enc_in 7 \
+      --dec_in 7 \
+      --c_out 7 \
       --des 'Exp' \
       --itr 1 \
       --train_epochs 3 >logs/V_Transformer/$model_name'_Continue_ETTh1_on_2'_$seq_len'_'$pred_len.log
