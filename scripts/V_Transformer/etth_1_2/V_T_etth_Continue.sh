@@ -12,7 +12,7 @@ seq_len=96
 for pred_len in 96 192 384 768
 do
 
-    python -u train_continue_Elec_Custom.py \
+    python -u train_continue_ETTh.py \
       --is_training 1 \
       --root_path ./dataset/ \
       --data_path ETTh2.csv \
