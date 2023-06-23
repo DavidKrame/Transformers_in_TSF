@@ -928,10 +928,12 @@ class Exp_Main_Freeze:
         )
 
         # FREEZING
-        model.enc_embedding.weight.requires_grad = False
-        model.enc_embedding.bias.requires_grad = False
-        model.dec_embedding.weight.requires_grad = False
-        model.dec_embedding.bias.requires_grad = False
+        model.enc_embedding.requires_grad = False
+        # model.enc_embedding.weight.requires_grad = False
+        # model.enc_embedding.bias.requires_grad = False
+        model.dec_embedding.requires_grad = False
+        # model.dec_embedding.weight.requires_grad = False
+        # model.dec_embedding.bias.requires_grad = False
 
         if self.args.use_multi_gpu and self.args.use_gpu:
             model = nn.DataParallel(model, device_ids=self.args.device_ids)
