@@ -1,28 +1,42 @@
-## For V_Trans AGAIN
-```sh
-sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom_Continue.sh
-```
 ## For V_Transformer
 For Electricity Normal and OTH :
 ```sh
 sh scripts/V_Transformer/electricity/V_T_Electricity.sh
 
 sh scripts/V_Transformer/electricity/V_T_Electricity_OTH.sh
+
+sh scripts/V_Transformer/electricity/V_T_Elec_Continue.sh
+
+sh scripts/V_Transformer/electricity/V_T_Elec_Prediction.sh
+
+sh scripts/V_Transformer/electricity/V_T_Elec_Freeze.sh
 ```
 For Elec_Custom 01 and 04 :
 ```sh
 sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom01.sh
 
-sh scripts/V_Transformer/electricity/V_T_Elec_Custom04.sh
+sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom04.sh
+
+sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom_Continue.sh
+
+sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom_Prediction.sh
+
+sh scripts/V_Transformer/elec_custom/V_T_Elec_Custom_Freeze.sh
 ```
 For ETTh1 and ETTh2 :
 ```sh
 sh scripts/V_Transformer/etth_1_2/V_T_ETTh1.sh
 
 sh scripts/V_Transformer/etth_1_2/V_T_ETTh2.sh
+
+sh scripts/V_Transformer/etth_1_2/V_T_etth_Continue.sh
+
+sh scripts/V_Transformer/etth_1_2/V_T_etth_Prediction.sh
+
+sh scripts/V_Transformer/etth_1_2/V_T_etth_Freeze.sh
 ```
 
-## TODAY (Elec_Custom)
+### For Conformer on Elec_Custom (EXPLAINED)
 Firstly, we'll train with :
 ```sh
 sh scripts/Conformer/elec_custom/Conformer.sh
@@ -41,6 +55,41 @@ Finally, we will take again our first saved folder and put in `checkpoints_SIRN/
 sh scripts/Conformer/elec_custom/Conformer_Prediction_Elec_Custom.sh
 ```
 After each operation, we have to take a copy of `Logs` folder.
+
+## For Conformer
+For Electricity Normal and OTH :
+```sh
+sh scripts/Conformer/electricity/Conformer.sh
+
+sh scripts/Conformer/electricity/ConformerOthers.sh
+
+sh scripts/Conformer/electricity/Conformer_Prediction_Elec1.sh
+
+sh scripts/Conformer/electricity/Conformer_Elec1_SIRN.sh
+
+sh scripts/Conformer/electricity/Conformer_Continue.sh
+```
+For Elec_Custom 01 and 04 :
+```sh
+sh scripts/Conformer/elec_custom/Conformer.sh
+
+sh scripts/Conformer/elec_custom/Conformer_Continue.sh
+
+sh scripts/Conformer/elec_custom/Conformer_Prediction_Elec_Custom.sh
+
+sh scripts/Conformer/elec_custom/Conformer_Elec_Cust_SIRN.sh
+```
+For ETTh1 and ETTh2 :
+```sh
+sh scripts/Conformer/etth_1_2/Conformer.sh
+
+sh scripts/Conformer/etth_1_2/Conformer_Continue.sh
+
+sh scripts/Conformer/etth_1_2/Conformer_Prediction_ETTh12.sh
+
+sh scripts/Conformer/etth_1_2/Conformer_ETTh_1_2_SIRN.sh
+```
+
 ## EXEMPLES
 To train *NLinear* and *DLinear* on **ETTh1, ETTm1, electricity** and **weather** datasets, use :  
 ```sh
