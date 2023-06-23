@@ -448,8 +448,8 @@ class Exp_Main(Exp_Basic):
 
 class Exp_Main_Elec_Continue(Exp_Basic):
     def __init__(self, args, setting):
-        super(Exp_Main_Elec_Continue, self).__init__(args)
-        self.setting = setting
+        super(Exp_Main_Elec_Continue, self).__init__(args, setting)
+        # self.setting = setting
 
     def _build_model(self):
         model_dict = {
