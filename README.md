@@ -7,15 +7,15 @@ sh scripts/MLP-LSTM/MLP/electricity/electricity.sh
 ```
 For ETTh1 and ETTh2 :
 ```sh
-!sh scripts/MLP-LSTM/MLP/etth_1_2/ETTh1.sh
+sh scripts/MLP-LSTM/MLP/etth_1_2/ETTh1.sh
 
-!sh scripts/MLP-LSTM/MLP/etth_1_2/ETTh2.sh
+sh scripts/MLP-LSTM/MLP/etth_1_2/ETTh2.sh
 ```
 For Elec_Custom 01 and 04 :
 ```sh
-!sh scripts/MLP-LSTM/MLP/elec_custom/elec_custom_01.sh
+sh scripts/MLP-LSTM/MLP/elec_custom/elec_custom_01.sh
 
-!sh scripts/MLP-LSTM/MLP/elec_custom/elec_custom_04.sh
+sh scripts/MLP-LSTM/MLP/elec_custom/elec_custom_04.sh
 ```  
 ## For V_Transformer
 For Electricity Normal and OTH :
