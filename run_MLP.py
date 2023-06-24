@@ -160,7 +160,7 @@ print("Mean: %f, StandardDeviation: %f" % (scaler.mean_, sqrt(scaler.var_)))
 # standardization the dataset
 timeseries = scaler.transform(timeseries)
 
-total_len = int(len(timeseries) * 1)  # 100 % of datas
+total_len = int(len(timeseries) * 0.1)  # 10 % of datas
 train_size = int(len(timeseries[:total_len]) * 0.70)
 test_size = len(timeseries[:total_len]) - train_size
 train, test = timeseries[:train_size], timeseries[train_size:total_len]
