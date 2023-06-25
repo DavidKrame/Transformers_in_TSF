@@ -1,23 +1,84 @@
-## For MLP
-For Electricity Normal and OTH :
-```sh
-sh scripts/MLP-LSTM/MLP/electricity/electricity_OTH.sh
-
-sh scripts/MLP-LSTM/MLP/electricity/electricity.sh
-```
-For ETTh1 and ETTh2 :
-```sh
-sh scripts/MLP-LSTM/MLP/etth_1_2/ETTh1.sh
-
-sh scripts/MLP-LSTM/MLP/etth_1_2/ETTh2.sh
-```
+## MLP
 For Elec_Custom 01 and 04 :
 ```sh
-sh scripts/MLP-LSTM/MLP/elec_custom/elec_custom_01.sh
+sh scripts/MLP-LSTM/ForMLP/elec_custom/MLP_Elec_Custom_Prediction.sh
 
-sh scripts/MLP-LSTM/MLP/elec_custom/elec_custom_04.sh
-```  
+sh scripts/MLP-LSTM/ForMLP/elec_custom/MLP_Elec_Custom_Freeze.sh
+
+sh scripts/MLP-LSTM/ForMLP/elec_custom/MLP_Elec_Custom_Continue.sh
+
+sh scripts/MLP-LSTM/ForMLP/elec_custom/MLP_Elec_Custom01.sh
+
+sh scripts/MLP-LSTM/ForMLP/elec_custom/MLP_Elec_Custom04.sh
+```
+
+For Electricity Normal and OTH :
+```sh
+sh scripts/MLP-LSTM/ForMLP/electricity/MLP_Elec_Prediction.sh
+
+sh scripts/MLP-LSTM/ForMLP/electricity/MLP_Elec_Freeze.sh
+
+sh scripts/MLP-LSTM/ForMLP/electricity/MLP_Elec_Continue.sh
+
+sh scripts/MLP-LSTM/ForMLP/electricity/MLP_Electricity.sh
+
+sh scripts/MLP-LSTM/ForMLP/electricity/MLP_Electricity_OTH.sh
+```
+
+For ETTh1 and ETTh2 :
+```sh
+sh scripts/MLP-LSTM/ForMLP/etth_1_2/MLP_etth_Prediction.sh
+
+sh scripts/MLP-LSTM/ForMLP/etth_1_2/MLP_etth_Freeze.sh
+
+sh scripts/MLP-LSTM/ForMLP/etth_1_2/MLP_etth_Continue.sh
+
+sh scripts/MLP-LSTM/ForMLP/etth_1_2/MLP_ETTh1.sh
+
+sh scripts/MLP-LSTM/ForMLP/etth_1_2/MLP_ETTh2.sh
+```
+
+## LSTM
+For Elec_Custom 01 and 04 :
+```sh
+sh scripts/MLP-LSTM/ForLSTM/elec_custom/LSTM_Elec_Custom_Prediction.sh
+
+sh scripts/MLP-LSTM/ForLSTM/elec_custom/LSTM_Elec_Custom_Freeze.sh
+
+sh scripts/MLP-LSTM/ForLSTM/elec_custom/LSTM_Elec_Custom_Continue.sh
+
+sh scripts/MLP-LSTM/ForLSTM/elec_custom/LSTM_Elec_Custom01.sh
+
+sh scripts/MLP-LSTM/ForLSTM/elec_custom/LSTM_Elec_Custom04.sh
+```
+
+For Electricity Normal and OTH :
+```sh
+sh scripts/MLP-LSTM/ForLSTM/electricity/LSTM_Elec_Prediction.sh
+
+sh scripts/MLP-LSTM/ForLSTM/electricity/LSTM_Elec_Freeze.sh
+
+sh scripts/MLP-LSTM/ForLSTM/electricity/LSTM_Elec_Continue.sh
+
+sh scripts/MLP-LSTM/ForLSTM/electricity/LSTM_Electricity.sh
+
+sh scripts/MLP-LSTM/ForLSTM/electricity/LSTM_Electricity_OTH.sh
+```
+
+For ETTh1 and ETTh2 :
+```sh
+sh scripts/MLP-LSTM/ForLSTM/etth_1_2/LSTM_etth_Prediction.sh
+
+sh scripts/MLP-LSTM/ForLSTM/etth_1_2/LSTM_etth_Freeze.sh
+
+sh scripts/MLP-LSTM/ForLSTM/etth_1_2/LSTM_etth_Continue.sh
+
+sh scripts/MLP-LSTM/ForLSTM/etth_1_2/LSTM_ETTh1.sh
+
+sh scripts/MLP-LSTM/ForLSTM/etth_1_2/LSTM_ETTh2.sh
+```
 ## For V_Transformer
+
 For Electricity Normal and OTH :
 ```sh
 sh scripts/V_Transformer/electricity/V_T_Electricity.sh
