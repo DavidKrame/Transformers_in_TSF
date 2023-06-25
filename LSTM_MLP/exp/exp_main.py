@@ -916,6 +916,12 @@ class Exp_Main_Freeze:
         )
 
         # FREEZING
+        if self.args.model == "MLP":
+            model.input_layer.requires_grad = False
+        elif self.args.model == "LSTM":
+            model.lstm.requires_grad = False
+        else:
+            raise RuntimeError
 
         if self.args.use_multi_gpu and self.args.use_gpu:
             model = nn.DataParallel(model, device_ids=self.args.device_ids)

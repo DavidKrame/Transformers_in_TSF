@@ -8,8 +8,10 @@ import numpy as np
 class Model(nn.Module):
     def __init__(self, args):
         super(Model, self).__init__()
-
-        self.model = nn.Sequential(nn.Linear(1, 1000), nn.GELU(), nn.Linear(1000, 1))
+        self.lstm = nn.LSTM(
+            input_size=1, hidden_size=1000, num_layers=1, batch_first=True
+        )
+        self.linear = nn.Linear(1000, 1)
 
     def forward(
         self,
@@ -21,5 +23,6 @@ class Model(nn.Module):
         dec_self_mask=None,
         dec_enc_mask=None,
     ):
-        out = self.model(x_enc)
+        out, _ = self.lstm(x_enc)
+        out = self.linear(out)
         return out
