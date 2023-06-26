@@ -4,7 +4,7 @@ from data.data_loader import (
     Dataset_Custom,
     Dataset_Pred,
     Dataset_elec,
-    Dataset_airdelay,
+    Dataset_elec,
 )
 from exp.exp_basic import Exp_Basic
 from models.model import Model
@@ -81,7 +81,7 @@ class Exp_Model(Exp_Basic):
             "EXCH": Dataset_elec,
             "ECL": Dataset_elec,
             "elec": Dataset_elec,
-            "air": Dataset_airdelay,
+            "air": Dataset_elec,
         }
         Data = data_dict[self.args.data]
         timeenc = 0 if args.embed != "timeF" else 1
