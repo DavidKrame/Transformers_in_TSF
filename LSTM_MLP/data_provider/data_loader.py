@@ -55,7 +55,7 @@ class Dataset_ETT_hour(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path, self.data_path))
 
         ##### For 100% of datas
-        """border1s = [
+        border1s = [
             0,
             12 * 30 * 24 - self.seq_len,
             12 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
@@ -64,19 +64,19 @@ class Dataset_ETT_hour(Dataset):
             12 * 30 * 24,
             12 * 30 * 24 + 4 * 30 * 24,
             12 * 30 * 24 + 8 * 30 * 24,
-        ]"""
+        ]
 
         ### For 50% of datas
-        border1s = [
-            0,
-            6 * 30 * 24 - self.seq_len,
-            6 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
-        ]
-        border2s = [
-            6 * 30 * 24,
-            6 * 30 * 24 + 4 * 30 * 24,
-            6 * 30 * 24 + 8 * 30 * 24,
-        ]
+        # border1s = [
+        #     0,
+        #     6 * 30 * 24 - self.seq_len,
+        #     6 * 30 * 24 + 4 * 30 * 24 - self.seq_len,
+        # ]
+        # border2s = [
+        #     6 * 30 * 24,
+        #     6 * 30 * 24 + 4 * 30 * 24,
+        #     6 * 30 * 24 + 8 * 30 * 24,
+        # ]
 
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
@@ -178,7 +178,7 @@ class Dataset_ETT_minute(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path, self.data_path))
 
         ### For 100% of datas
-        """border1s = [
+        border1s = [
             0,
             12 * 30 * 24 * 4 - self.seq_len,
             12 * 30 * 24 * 4 + 4 * 30 * 24 * 4 - self.seq_len,
@@ -187,18 +187,18 @@ class Dataset_ETT_minute(Dataset):
             12 * 30 * 24 * 4,
             12 * 30 * 24 * 4 + 4 * 30 * 24 * 4,
             12 * 30 * 24 * 4 + 8 * 30 * 24 * 4,
-        ]"""
+        ]
         #### For 50%
-        border1s = [
-            0,
-            6 * 30 * 24 * 4 - self.seq_len,
-            6 * 30 * 24 * 4 + 4 * 30 * 24 * 4 - self.seq_len,
-        ]
-        border2s = [
-            6 * 30 * 24 * 4,
-            6 * 30 * 24 * 4 + 4 * 30 * 24 * 4,
-            6 * 30 * 24 * 4 + 8 * 30 * 24 * 4,
-        ]
+        # border1s = [
+        #     0,
+        #     6 * 30 * 24 * 4 - self.seq_len,
+        #     6 * 30 * 24 * 4 + 4 * 30 * 24 * 4 - self.seq_len,
+        # ]
+        # border2s = [
+        #     6 * 30 * 24 * 4,
+        #     6 * 30 * 24 * 4 + 4 * 30 * 24 * 4,
+        #     6 * 30 * 24 * 4 + 8 * 30 * 24 * 4,
+        # ]
 
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
@@ -302,7 +302,7 @@ class Dataset_Custom(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path, self.data_path))
         # 12/2/2
         #### For 100% of datas
-        """border1s = [
+        border1s = [
             0,
             12 * 30 * 24 - self.seq_len,
             12 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
@@ -311,18 +311,18 @@ class Dataset_Custom(Dataset):
             12 * 30 * 24,
             12 * 30 * 24 + 2 * 30 * 24,
             12 * 30 * 24 + 4 * 30 * 24,
-        ]"""
+        ]
         ### For 50%
-        border1s = [
-            0,
-            6 * 30 * 24 - self.seq_len,
-            6 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
-        ]
-        border2s = [
-            6 * 30 * 24,
-            6 * 30 * 24 + 2 * 30 * 24,
-            6 * 30 * 24 + 4 * 30 * 24,
-        ]
+        # border1s = [
+        #     0,
+        #     6 * 30 * 24 - self.seq_len,
+        #     6 * 30 * 24 + 2 * 30 * 24 - self.seq_len,
+        # ]
+        # border2s = [
+        #     6 * 30 * 24,
+        #     6 * 30 * 24 + 2 * 30 * 24,
+        #     6 * 30 * 24 + 4 * 30 * 24,
+        # ]
 
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
@@ -418,7 +418,7 @@ class Dataset_Custom_2(Dataset):
         df_raw = pd.read_csv(os.path.join(self.root_path, self.data_path))
         # 48/5/5
         ### For 100% of datas
-        """border1s = [
+        border1s = [
             0,
             48 * 30 * 24 - self.seq_len,
             48 * 30 * 24 + 5 * 30 * 24 - self.seq_len,
@@ -427,18 +427,18 @@ class Dataset_Custom_2(Dataset):
             48 * 30 * 24,
             48 * 30 * 24 + 5 * 30 * 24,
             48 * 30 * 24 + 10 * 30 * 24,
-        ]"""
+        ]
         ### For 50%
-        border1s = [
-            0,
-            24 * 30 * 24 - self.seq_len,
-            24 * 30 * 24 + 5 * 30 * 24 - self.seq_len,
-        ]
-        border2s = [
-            24 * 30 * 24,
-            24 * 30 * 24 + 5 * 30 * 24,
-            24 * 30 * 24 + 10 * 30 * 24,
-        ]
+        # border1s = [
+        #     0,
+        #     24 * 30 * 24 - self.seq_len,
+        #     24 * 30 * 24 + 5 * 30 * 24 - self.seq_len,
+        # ]
+        # border2s = [
+        #     24 * 30 * 24,
+        #     24 * 30 * 24 + 5 * 30 * 24,
+        #     24 * 30 * 24 + 10 * 30 * 24,
+        # ]
 
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
