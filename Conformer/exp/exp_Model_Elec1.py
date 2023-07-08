@@ -311,7 +311,7 @@ class Exp_Model:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        folder_path_csv = "./csv_results/" + setting + "/"
+        folder_path_csv = "./csv_results/Elec1/" + setting + "/"
         if not os.path.exists(folder_path_csv):
             os.makedirs(folder_path_csv)
 
