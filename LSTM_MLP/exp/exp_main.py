@@ -1237,8 +1237,28 @@ class Exp_Main_Freeze:
         folder_path = "./results/" + setting + "/"
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
+        folder_path_csv = "./csv_results/" + setting + "/"
+        if not os.path.exists(folder_path_csv):
+            os.makedirs(folder_path_csv)
 
         mae, mse, rmse, mape, mspe, rse, corr = metric(preds, trues)
+
+        """
+        CSV OF RESULTS
+        """
+        new_row = {"Pred_len": self.args.pred_len, "mae": mae, "mse": mse}
+        try:
+            data_fr = pd.read_csv(folder_path_csv + "file.csv")
+        except FileNotFoundError:
+            data = {"Pred_len": [], "mae": [], "mse": []}
+            data_fr = pd.DataFrame(data)
+
+        data_fr = data_fr.append(new_row, ignore_index=True)
+        data_fr.to_csv(folder_path_csv + "file.csv", index=False)
+        """
+        FIN CSV OF RESULTS
+        """
+
         print("mse:{}, mae:{}".format(mse, mae))
         f = open("result.txt", "a")
         f.write(setting + "  \n")
