@@ -5,7 +5,7 @@ from utils.tools import EarlyStopping, adjust_learning_rate, visual, test_params
 from utils.metrics import metric
 
 import numpy as np
-import pandas as pd
+import pandas as pds
 import torch
 import torch.nn as nn
 from torch import optim
@@ -346,7 +346,7 @@ class Exp_Main(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        folder_path_csv = "./csv_results/Normal/" + setting + "/"
+        folder_path_csv = "./csv_results/"
         if not os.path.exists(folder_path_csv):
             os.makedirs(folder_path_csv)
 
@@ -357,10 +357,10 @@ class Exp_Main(Exp_Basic):
         """
         new_row = {"Pred_len": self.args.pred_len, "mae": mae, "mse": mse}
         try:
-            data_fr = pd.read_csv(folder_path_csv + "file.csv")
+            data_fr = pds.read_csv(folder_path_csv + "file.csv")
         except:
             data = {"Pred_len": [], "mae": [], "mse": []}
-            data_fr = pd.DataFrame(data)
+            data_fr = pds.DataFrame(data)
 
         data_fr = data_fr.append(new_row, ignore_index=True)
         data_fr.to_csv(folder_path_csv + "file.csv", index=False)
@@ -454,7 +454,7 @@ class Exp_Main(Exp_Basic):
             os.makedirs(folder_path)
 
         np.save(folder_path + "real_prediction.npy", preds)
-        pd.DataFrame(
+        pds.DataFrame(
             np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1),
             columns=pred_data.cols,
         ).to_csv(folder_path + "real_prediction.csv", index=False)
@@ -808,7 +808,7 @@ class Exp_Main_Continue:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        folder_path_csv = "./csv_results/Continue/" + setting + "/"
+        folder_path_csv = "./csv_results/"
         if not os.path.exists(folder_path_csv):
             os.makedirs(folder_path_csv)
 
@@ -819,10 +819,10 @@ class Exp_Main_Continue:
         """
         new_row = {"Pred_len": self.args.pred_len, "mae": mae, "mse": mse}
         try:
-            data_fr = pd.read_csv(folder_path_csv + "file.csv")
+            data_fr = pds.read_csv(folder_path_csv + "file.csv")
         except:
             data = {"Pred_len": [], "mae": [], "mse": []}
-            data_fr = pd.DataFrame(data)
+            data_fr = pds.DataFrame(data)
 
         data_fr = data_fr.append(new_row, ignore_index=True)
         data_fr.to_csv(folder_path_csv + "file.csv", index=False)
@@ -916,7 +916,7 @@ class Exp_Main_Continue:
             os.makedirs(folder_path)
 
         np.save(folder_path + "real_prediction.npy", preds)
-        pd.DataFrame(
+        pds.DataFrame(
             np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1),
             columns=pred_data.cols,
         ).to_csv(folder_path + "real_prediction.csv", index=False)
@@ -1277,7 +1277,7 @@ class Exp_Main_Freeze:
         folder_path = "./results/" + setting + "/"
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
-        folder_path_csv = "./csv_results/Freeze/" + setting + "/"
+        folder_path_csv = "./csv_results/"
         if not os.path.exists(folder_path_csv):
             os.makedirs(folder_path_csv)
 
@@ -1288,10 +1288,10 @@ class Exp_Main_Freeze:
         """
         new_row = {"Pred_len": self.args.pred_len, "mae": mae, "mse": mse}
         try:
-            data_fr = pd.read_csv(folder_path_csv + "file.csv")
+            data_fr = pds.read_csv(folder_path_csv + "file.csv")
         except:
             data = {"Pred_len": [], "mae": [], "mse": []}
-            data_fr = pd.DataFrame(data)
+            data_fr = pds.DataFrame(data)
 
         data_fr = data_fr.append(new_row, ignore_index=True)
         data_fr.to_csv(folder_path_csv + "file.csv", index=False)
@@ -1386,7 +1386,7 @@ class Exp_Main_Freeze:
             os.makedirs(folder_path)
 
         np.save(folder_path + "real_prediction.npy", preds)
-        pd.DataFrame(
+        pds.DataFrame(
             np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1),
             columns=pred_data.cols,
         ).to_csv(folder_path + "real_prediction.csv", index=False)

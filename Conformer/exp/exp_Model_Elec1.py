@@ -14,7 +14,7 @@ from utils.metrics import metric
 from utils.metrics import RMSE
 
 import numpy as np
-import pandas as pd
+import pandas as pds
 import math
 import collections
 import torch
@@ -311,7 +311,7 @@ class Exp_Model:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        folder_path_csv = "./csv_results/Elec1/" + setting + "/"
+        folder_path_csv = "./csv_results/"
         if not os.path.exists(folder_path_csv):
             os.makedirs(folder_path_csv)
 
@@ -320,10 +320,10 @@ class Exp_Model:
         """
         new_row = {"Pred_len": self.args.pred_len, "mae": mae, "mse": mse}
         try:
-            data_fr = pd.read_csv(folder_path_csv + "file.csv")
+            data_fr = pds.read_csv(folder_path_csv + "file.csv")
         except:
             data = {"Pred_len": [], "mae": [], "mse": []}
-            data_fr = pd.DataFrame(data)
+            data_fr = pds.DataFrame(data)
 
         data_fr = data_fr.append(new_row, ignore_index=True)
         data_fr.to_csv(folder_path_csv + "file.csv", index=False)
