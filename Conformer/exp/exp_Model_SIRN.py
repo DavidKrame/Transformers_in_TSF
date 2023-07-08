@@ -328,7 +328,7 @@ class Exp_Model:
         new_row = {"Pred_len": self.args.pred_len, "mae": mae, "mse": mse}
         try:
             data_fr = pd.read_csv(folder_path_csv + "file.csv")
-        except FileNotFoundError:
+        except:
             data = {"Pred_len": [], "mae": [], "mse": []}
             data_fr = pd.DataFrame(data)
 
