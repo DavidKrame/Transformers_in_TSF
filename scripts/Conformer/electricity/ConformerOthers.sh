@@ -11,9 +11,11 @@ train_epochs=10
 patience=5
 model_name="Conformer"
 seq_len=96
+file_name="Elec_OTH"
 
 python -u ./Conformer/train.py \
     --data ECL \
+    --file_name $file_name \
     --root_path ./dataset/ \
     --data_path electricity_OTH.csv \
     --patience $patience\

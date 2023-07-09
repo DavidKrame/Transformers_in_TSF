@@ -10,10 +10,12 @@ train_epochs=3
 patience=2
 model_name="Conformer"
 seq_len=96
+file_name="Elec_Custom_Continue"
 
 python -u ./Conformer/train_Elec_Custom_Continue.py \
     --data elec \
     --root_path ./dataset/ \
+    --file_name $file_name \
     --data_path custom_elec_04.csv \
     --patience $patience\
     --target "OT" \

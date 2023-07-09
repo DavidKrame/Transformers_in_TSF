@@ -10,9 +10,11 @@ train_epochs=10
 patience=3
 model_name="Conformer"
 seq_len=96
+file_name="Etth_Freeze_SIRN"
 
 python -u ./Conformer/train_SIRN_ETTh_1_2.py \
     --data ETTh2 \
+    --file_name $file_name \
     --root_path ./dataset/ \
     --data_path ETTh2.csv \
     --patience $patience\

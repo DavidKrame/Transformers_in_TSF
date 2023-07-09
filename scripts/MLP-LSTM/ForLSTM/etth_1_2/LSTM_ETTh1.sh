@@ -8,6 +8,7 @@ fi
 
 model_name=LSTM
 seq_len=96
+file_name="Etth1"
 
 for pred_len in 96 192 384 768
 do
@@ -15,6 +16,7 @@ do
     python -u ./LSTM_MLP/run_longExp.py \
       --is_training 1 \
       --root_path ./dataset/ \
+      --file_name $file_name \
       --data_path ETTh1.csv \
       --model_id ETTh1_96_$pred_len \
       --model $model_name \

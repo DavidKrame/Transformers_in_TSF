@@ -28,8 +28,15 @@ parser.add_argument(
     "--model",
     type=str,
     required=True,
-    default="Autoformer",
+    default="Transformer",
     help="model name, options: [Autoformer, Informer, Transformer]",
+)
+parser.add_argument(
+    "--file_name",
+    type=str,
+    required=False,
+    default="File",
+    help="File_name for training purposes (CSV files)",
 )
 
 # data loader

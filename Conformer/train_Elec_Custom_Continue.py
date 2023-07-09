@@ -25,6 +25,13 @@ parser.add_argument(
     default="Model",
     help="model of experiment, options: [informer, informerstack, informerlight(TBD)]",
 )
+parser.add_argument(
+    "--file_name",
+    type=str,
+    required=False,
+    default="File",
+    help="File_name for training purposes (CSV files)",
+)
 parser.add_argument("--data", type=str, default="elec", help="data")
 parser.add_argument(
     "--root_path", type=str, default="./datataset", help="root path of the data file"

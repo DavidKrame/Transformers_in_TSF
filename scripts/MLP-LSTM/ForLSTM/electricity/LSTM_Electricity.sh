@@ -8,12 +8,14 @@ fi
 
 model_name=LSTM
 seq_len=96
+file_name="Electricity"
 
 for pred_len in 96 192 384 768
 do
 
     python -u ./LSTM_MLP/run_longExp.py \
       --is_training 1 \
+      --file_name $file_name \
       --root_path ./dataset/ \
       --data_path electricity.csv \
       --model_id electricity_96_$pred_len \

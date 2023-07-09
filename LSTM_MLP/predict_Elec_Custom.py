@@ -31,6 +31,13 @@ parser.add_argument(
     default="MLP",
     help="model name, options: [LSTM, MLP]",
 )
+parser.add_argument(
+    "--file_name",
+    type=str,
+    required=False,
+    default="File",
+    help="File_name for training purposes (CSV files)",
+)
 
 # data loader
 parser.add_argument(

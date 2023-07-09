@@ -10,10 +10,12 @@ train_epochs=10
 patience=3
 model_name="Conformer"
 seq_len=96
+file_name="Elec_Custom_Freeze_SIRN"
 
 python -u ./Conformer/train_SIRN_Elec_Custom.py \
     --data elec \
     --root_path ./dataset/ \
+    --file_name $file_name \
     --data_path custom_elec_04.csv \
     --patience $patience\
     --target "OT" \

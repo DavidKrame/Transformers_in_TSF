@@ -8,12 +8,14 @@ fi
 
 model_name=Transformer
 seq_len=96
+file_name="Elec_Custom_01"
 
 for pred_len in 96 192 384 768
 do
 
     python -u run_longExp.py \
       --is_training 1 \
+      --file_name $file_name \
       --root_path ./dataset/ \
       --data_path custom_elec_01.csv \
       --model_id custom_elec_01_96_$pred_len \

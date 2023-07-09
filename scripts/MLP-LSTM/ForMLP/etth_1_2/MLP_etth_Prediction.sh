@@ -8,6 +8,7 @@ fi
 
 model_name=MLP
 seq_len=96
+file_name="Etth_Prediction"
 
 for pred_len in 96 192 384 768
 do
@@ -15,6 +16,7 @@ do
     python -u ./LSTM_MLP/predict_ETTh.py \
       --is_training 0 \
       --root_path ./dataset/ \
+      --file_name $file_name \
       --data_path ETTh2.csv \
       --model_id ETTh2_96_$pred_len \
       --model $model_name \

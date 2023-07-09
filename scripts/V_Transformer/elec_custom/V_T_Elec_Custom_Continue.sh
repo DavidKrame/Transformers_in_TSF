@@ -8,6 +8,7 @@ fi
 
 model_name=Transformer
 seq_len=96
+file_name="Elec_Custom_Continue"
 
 for pred_len in 96 192 384 768
 do
@@ -15,6 +16,7 @@ do
     python -u train_continue_Elec_Custom.py \
       --is_training 1 \
       --root_path ./dataset/ \
+      --file_name $file_name \
       --data_path custom_elec_04.csv \
       --model_id custom_elec_04_96_$pred_len \
       --model $model_name \
