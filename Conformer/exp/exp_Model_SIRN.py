@@ -203,8 +203,7 @@ class Exp_Model:
         vali_data, vali_loader = self._get_data(flag="val")
         test_data, test_loader = self._get_data(flag="test")
 
-        # path = os.path.join(self.args.checkpoints, setting)
-        path_train = os.path.join("./checkpoints_SIRN/in_process/", setting)
+        path_train = os.path.join(self.args.checkpoints, setting)
 
         if not os.path.exists(path_train):
             os.makedirs(path_train)
@@ -321,8 +320,6 @@ class Exp_Model:
         folder_path_csv = (
             "./csv_results/"
             + str(self.args.model)
-            + "/"
-            + str(self.args.data)
             + "/"
             + str(self.args.file_name)
             + "/"

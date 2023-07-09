@@ -197,8 +197,8 @@ class Exp_Model:
         # path = os.path.join(self.args.checkpoints, setting)
         # if not os.path.exists(path):
         #     os.makedirs(path)
-        path_train = os.path.join("./checkpoints_SIRN/in_process/", setting)
-        path_load = os.path.join("./checkpoints_SIRN/init/", setting)
+        path_train = os.path.join(self.args.checkpoints, setting)
+        path_load = os.path.join(self.args.checkpoints, "init", setting)
 
         if not os.path.exists(path_train):
             os.makedirs(path_train)
@@ -314,8 +314,6 @@ class Exp_Model:
         folder_path_csv = (
             "./csv_results/"
             + str(self.args.model)
-            + "/"
-            + str(self.args.data)
             + "/"
             + str(self.args.file_name)
             + "/"

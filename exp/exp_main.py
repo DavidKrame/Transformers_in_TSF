@@ -354,8 +354,6 @@ class Exp_Main(Exp_Basic):
             "./csv_results/"
             + str(self.args.model)
             + "/"
-            + str(self.args.data)
-            + "/"
             + str(self.args.file_name)
             + "/"
         )
@@ -826,8 +824,6 @@ class Exp_Main_Continue:
         folder_path_csv = (
             "./csv_results/"
             + str(self.args.model)
-            + "/"
-            + str(self.args.data)
             + "/"
             + str(self.args.file_name)
             + "/"
@@ -1306,8 +1302,6 @@ class Exp_Main_Freeze:
         folder_path_csv = (
             "./csv_results/"
             + str(self.args.model)
-            + "/"
-            + str(self.args.data)
             + "/"
             + str(self.args.file_name)
             + "/"
